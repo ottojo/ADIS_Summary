@@ -1,4 +1,3 @@
-# Static Web Content
 # Dynamic Web Content
 # Server-side Scripting
 # Data Management
