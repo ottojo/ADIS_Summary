@@ -1,0 +1,20 @@
+name: GH-Pages deploy
+
+on: push
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install pandoc
+        run: sudo apt install -y pandoc
+      - name: Build document
+        run: make html
+      - name: Collect build outputs
+        run: mkdir output && mv index.html styling.css output
+      - name: Push html to gh-pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./output
