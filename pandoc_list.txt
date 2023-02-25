@@ -1,1 +1,3 @@
-src/header.md
+README.md
+src/remaining_chapters.md
+metadata.yaml
