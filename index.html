@@ -26,7 +26,14 @@
 <nav id="TOC" role="doc-toc">
 <ul>
 <li><a href="#architectures-for-distributed-internet-services">Architectures for Distributed Internet Services</a></li>
-<li><a href="#static-web-content">Static Web Content</a></li>
+<li><a href="#static-web-content">Static Web Content</a>
+<ul>
+<li><a href="#web-servers">Web Servers</a>
+<ul>
+<li><a href="#static-content">Static Content</a></li>
+<li><a href="#architectures">Architectures</a></li>
+</ul></li>
+</ul></li>
 <li><a href="#dynamic-web-content">Dynamic Web Content</a></li>
 <li><a href="#server-side-scripting">Server-side Scripting</a></li>
 <li><a href="#data-management">Data Management</a></li>
@@ -52,6 +59,59 @@
 <p>This is my summary for the lecture “Architectures for Distributed Internet Services”, as held by Franz Hauck and Benjamin Erb in 2022 at Ulm University.</p>
 <p>The HTML version of this summary can be found at <a href="https://ottojo.github.io/ADIS_Summary/">https://ottojo.github.io/ADIS_Summary/</a>, the sources are on GitHub at <a href="https://github.com/ottojo/ADIS_Summary">https://github.com/ottojo/ADIS_Summary</a>.</p>
 <h1 id="static-web-content">Static Web Content</h1>
+<h2 id="web-servers">Web Servers</h2>
+<ul>
+<li>HTTP endpoint which exposes HTTP endpoints</li>
+<li>Typical tasks:
+<ul>
+<li>Request parsing</li>
+<li>URI resolving</li>
+<li>Responding with appropriate content</li>
+</ul></li>
+<li>Content often provided by external components</li>
+<li>Offers SSL/TLS termination</li>
+<li>Might provide access control</li>
+<li>Might provide caching</li>
+</ul>
+<h3 id="static-content">Static Content</h3>
+<ul>
+<li>This represents a large amount of web resources</li>
+<li>Examples:
+<ul>
+<li>Immutable content (images, videos, static pages)</li>
+<li>Static assets (stylesheets, JS sources)</li>
+</ul></li>
+<li>Server performance in this case predominantly I/O-bound (both disk and network)</li>
+</ul>
+<h3 id="architectures">Architectures</h3>
+<h4 id="multi-thread-multi-process">multi-thread / multi-process</h4>
+<ul>
+<li>One dedicated thread for accepting connections</li>
+<li>Dedicated thread per connections (spawned by first thread)</li>
+<li>Allows multiple concurrent connections</li>
+<li>Synchronous, blocking IO may be used</li>
+<li>Large number of connections make efficient scheduling challenging</li>
+<li>-&gt; C10k Problem: Challenge of handling 10k concurrent connections to a server (early 2000s, now: C1M scale and beyond)</li>
+</ul>
+<h4 id="solutions-for-the-c10k-problem">Solutions for the C10k Problem</h4>
+<ul>
+<li>Avoid spawning many processes</li>
+<li>Avoid 1:1 mapping between connections and threads</li>
+<li>Using asynchronous and non-blocking I/O (reduces number of waiting threads)</li>
+</ul>
+<h4 id="reactor-pattern">Reactor Pattern</h4>
+<ul>
+<li>Reactor: single thread with event-loop
+<ul>
+<li>reacts to IO events from a queue</li>
+<li>dispatches events</li>
+</ul></li>
+<li>Event-specific handlers
+<ul>
+<li>process events produced by reactor</li>
+</ul></li>
+<li>Implemented in nginx: One master process + one worker per core</li>
+</ul>
 <h1 id="dynamic-web-content">Dynamic Web Content</h1>
 <h1 id="server-side-scripting">Server-side Scripting</h1>
 <h1 id="data-management">Data Management</h1>
