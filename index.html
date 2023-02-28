@@ -34,7 +34,20 @@
 <li><a href="#architectures">Architectures</a></li>
 </ul></li>
 </ul></li>
-<li><a href="#dynamic-web-content">Dynamic Web Content</a></li>
+<li><a href="#dynamic-web-content">Dynamic Web Content</a>
+<ul>
+<li><a href="#client-side-dynamicity">Client-side dynamicity</a></li>
+<li><a href="#server-side-dynamicity">Server-side dynamicity</a></li>
+<li><a href="#creating-dynamic-web-content">Creating dynamic web content</a>
+<ul>
+<li><a href="#server-side-includes">Server Side Includes</a></li>
+<li><a href="#external-programs-cgi">External Programs: CGI</a></li>
+<li><a href="#alternative-fastcgi">Alternative: FastCGI</a></li>
+<li><a href="#scgi-simple-common-gateway-interface-alternative-to-fastcgi">SCGI (Simple Common Gateway Interface): Alternative to FastCGI</a></li>
+<li><a href="#problems-with-cgi">Problems with CGI</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#dynamic-web-content-1">Dynamic Web Content</a></li>
 <li><a href="#server-side-scripting">Server-side Scripting</a></li>
 <li><a href="#data-management">Data Management</a></li>
 <li><a href="#session-management">Session Management</a></li>
@@ -113,6 +126,75 @@
 <li>Implemented in nginx: One master process + one worker per core</li>
 </ul>
 <h1 id="dynamic-web-content">Dynamic Web Content</h1>
+<h2 id="client-side-dynamicity">Client-side dynamicity</h2>
+<ul>
+<li>Generated within browser</li>
+<li>Related to presentation of content</li>
+</ul>
+<h2 id="server-side-dynamicity">Server-side dynamicity</h2>
+<ul>
+<li>automatic updating of static files</li>
+<li>webserver delegates requests to external programs
+<ul>
+<li>e.g. CGI script</li>
+</ul></li>
+<li>webserver executes scripts internally
+<ul>
+<li>e.g. php module</li>
+</ul></li>
+<li>webserver has builtin site-gerneration code
+<ul>
+<li>tight coupling between webserver and application</li>
+</ul></li>
+</ul>
+<h2 id="creating-dynamic-web-content">Creating dynamic web content</h2>
+<ul>
+<li>some program takes http requests as input and produces web resources (HTML) as output
+<ul>
+<li>e.g. java servelet</li>
+</ul></li>
+<li>code may be embedded into web resource, inserting code output into resource
+<ul>
+<li>e.g. java server faces, PHP</li>
+</ul></li>
+</ul>
+<h3 id="server-side-includes">Server Side Includes</h3>
+<ul>
+<li>Directives inserted into HTML</li>
+<li>executed by the server, but may delegate to CGI scripts</li>
+</ul>
+<h3 id="external-programs-cgi">External Programs: CGI</h3>
+<ul>
+<li>Specifies interaction between webserver and external programs (CGI scripts)</li>
+<li>Server spawns new process for each request</li>
+<li>HTTP headers passed via env variables</li>
+<li>HTTP body passed via stdin</li>
+<li>CGI script may produce entire HTTP response, or only essential headers and body (remaining data added by server)</li>
+<li>Modules for interacting with CGI webserver exist in programming languages, such as CGI.pm in perl</li>
+</ul>
+<p>Drawbacks: * Process creation may be slow * Script initialization happens on every request * Limited communication channel in stdin/out</p>
+<h3 id="alternative-fastcgi">Alternative: FastCGI</h3>
+<ul>
+<li>Binary protocol</li>
+<li>via unix socket/named pipe/tcp connection</li>
+<li>Script keeps running and processes multiple request</li>
+<li>Multiple (remote) FastCGI applications may be running and accessed by single web server
+<ul>
+<li>allows load balancing</li>
+<li>separates web and application server</li>
+</ul></li>
+</ul>
+<h3 id="scgi-simple-common-gateway-interface-alternative-to-fastcgi">SCGI (Simple Common Gateway Interface): Alternative to FastCGI</h3>
+<ul>
+<li>Simplifies interface: non-binary interface</li>
+<li>Easier to implement than FastCGI</li>
+</ul>
+<h3 id="problems-with-cgi">Problems with CGI</h3>
+<ul>
+<li>CGI programs often use same security context as web server</li>
+<li>Apache allows running CGI scripts as specified user/group</li>
+</ul>
+<h1 id="dynamic-web-content-1">Dynamic Web Content</h1>
 <h1 id="server-side-scripting">Server-side Scripting</h1>
 <h1 id="data-management">Data Management</h1>
 <h1 id="session-management">Session Management</h1>
