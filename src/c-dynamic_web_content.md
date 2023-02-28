@@ -31,6 +31,7 @@
 * Modules for interacting with CGI webserver exist in programming languages, such as CGI.pm in perl
 
 Drawbacks:
+
 * Process creation may be slow
 * Script initialization happens on every request
 * Limited communication channel in stdin/out
