@@ -172,7 +172,12 @@
 <li>CGI script may produce entire HTTP response, or only essential headers and body (remaining data added by server)</li>
 <li>Modules for interacting with CGI webserver exist in programming languages, such as CGI.pm in perl</li>
 </ul>
-<p>Drawbacks: * Process creation may be slow * Script initialization happens on every request * Limited communication channel in stdin/out</p>
+<p>Drawbacks:</p>
+<ul>
+<li>Process creation may be slow</li>
+<li>Script initialization happens on every request</li>
+<li>Limited communication channel in stdin/out</li>
+</ul>
 <h3 id="alternative-fastcgi">Alternative: FastCGI</h3>
 <ul>
 <li>Binary protocol</li>
