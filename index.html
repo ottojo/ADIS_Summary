@@ -47,8 +47,12 @@
 <li><a href="#problems-with-cgi">Problems with CGI</a></li>
 </ul></li>
 </ul></li>
-<li><a href="#dynamic-web-content-1">Dynamic Web Content</a></li>
-<li><a href="#server-side-scripting">Server-side Scripting</a></li>
+<li><a href="#server-side-scripting">Server-side Scripting</a>
+<ul>
+<li><a href="#example-perl">Example: Perl</a></li>
+<li><a href="#example-java">Example: Java</a></li>
+<li><a href="#example-php">Example: PHP</a></li>
+</ul></li>
 <li><a href="#data-management">Data Management</a></li>
 <li><a href="#session-management">Session Management</a></li>
 <li><a href="#client-side-developments">Client-side Developments</a></li>
@@ -199,8 +203,46 @@
 <li>CGI programs often use same security context as web server</li>
 <li>Apache allows running CGI scripts as specified user/group</li>
 </ul>
-<h1 id="dynamic-web-content-1">Dynamic Web Content</h1>
 <h1 id="server-side-scripting">Server-side Scripting</h1>
+<p>Scenario: Static HTML page should be enriched by dynamic content.</p>
+<p>Here, inside-out scripting is considered. This means scripts are placed inside HTML document. The script output is inserted at their location in the HTML document.</p>
+<p>Execution of the scripts:</p>
+<ul>
+<li>External script interpreter, spawned by server</li>
+<li>Long-ruinning external execution environment
+<ul>
+<li>Similar benefits to FastCGI vs CGI</li>
+<li>Used by PHP for example</li>
+</ul></li>
+<li>Server-internal script handling</li>
+</ul>
+<p>Inside-out scripting allows HTML-centric development approach.</p>
+<p>Self-processing pages are a pattern for processing form data on the same page it is displayed on. This is done by distinguishing between GET/POST request during script execution.</p>
+<h2 id="example-perl">Example: Perl</h2>
+<ul>
+<li>Approach 1
+<ul>
+<li>HTML provided in template file with placeholders</li>
+<li>Separate script provides content for placeholders</li>
+</ul></li>
+<li>Approach 2
+<ul>
+<li>Code directly embedded in HTML with special syntax</li>
+<li>Output is inserted in location of script, if requested</li>
+</ul></li>
+</ul>
+<h2 id="example-java">Example: Java</h2>
+<ul>
+<li>Inside-out scripting approach</li>
+<li>Before execution, JSP-to-Java transformation transforms HTML with embedded scripts to Java program (“Servlet”) which outputs entire page, containing static and dynamic content.</li>
+<li>Generated Servlet allows ahead-of-time compilation</li>
+</ul>
+<h2 id="example-php">Example: PHP</h2>
+<ul>
+<li>Designed for inside-out scripting</li>
+<li>Execution environment included in web servers like apache</li>
+<li>Includes useful functionality for web-dev (databases, HTTP, etc)</li>
+</ul>
 <h1 id="data-management">Data Management</h1>
 <h1 id="session-management">Session Management</h1>
 <h1 id="client-side-developments">Client-side Developments</h1>
