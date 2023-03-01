@@ -1,5 +1,6 @@
 README.md
 src/b-static_web_content.md
 src/c-dynamic_web_content.md
+src/d-server_side_scripting.md
 src/remaining_chapters.md
 metadata.yaml

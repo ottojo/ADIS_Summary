@@ -1,5 +1,3 @@
-# Dynamic Web Content
-# Server-side Scripting
 # Data Management
 # Session Management
 # Client-side Developments
