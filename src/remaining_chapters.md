@@ -1,4 +1,3 @@
-# Data Management
 # Session Management
 # Client-side Developments
 # Object-relational Mapping
