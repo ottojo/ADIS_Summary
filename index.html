@@ -53,7 +53,15 @@
 <li><a href="#example-java">Example: Java</a></li>
 <li><a href="#example-php">Example: PHP</a></li>
 </ul></li>
-<li><a href="#data-management">Data Management</a></li>
+<li><a href="#data-management-sever-side-state">Data Management: Sever-Side State</a>
+<ul>
+<li><a href="#storage-options">Storage Options</a>
+<ul>
+<li><a href="#main-memory">main memory</a></li>
+<li><a href="#local-storage">local storage</a></li>
+<li><a href="#remote-storage">remote storage</a></li>
+</ul></li>
+</ul></li>
 <li><a href="#session-management">Session Management</a></li>
 <li><a href="#client-side-developments">Client-side Developments</a></li>
 <li><a href="#object-relational-mapping">Object-relational Mapping</a></li>
@@ -243,7 +251,113 @@
 <li>Execution environment included in web servers like apache</li>
 <li>Includes useful functionality for web-dev (databases, HTTP, etc)</li>
 </ul>
-<h1 id="data-management">Data Management</h1>
+<h1 id="data-management-sever-side-state">Data Management: Sever-Side State</h1>
+<p>Data is stored both on server and client, and data is exchanged in requests and responses. Examples for client data include:</p>
+<ul>
+<li>Cached resources</li>
+<li>Cookies</li>
+<li>JS engine state</li>
+</ul>
+<p>Server data includes:</p>
+<ul>
+<li>Application data</li>
+<li>Session state</li>
+<li>Application state</li>
+</ul>
+<p>The server holds <em>static</em> resources and <em>dynamic</em> application state. Application state may include:</p>
+<ul>
+<li>User accounts and preferences</li>
+<li>Dynamically generated content
+<ul>
+<li>recommendations</li>
+<li>shopping cart</li>
+<li>messages between users</li>
+</ul></li>
+<li>Cached and aggregated data</li>
+</ul>
+<p>Aspects of server-side state include:</p>
+<ul>
+<li>how to interact with the server state</li>
+<li>how data is modeled</li>
+<li>mutability of data</li>
+<li>security</li>
+<li>storage duration</li>
+<li>access patterns</li>
+</ul>
+<p>Resulting from those aspects are design choices regarding server-side state:</p>
+<h2 id="storage-options">Storage Options</h2>
+<p>Options are:</p>
+<h3 id="main-memory">main memory</h3>
+<ul>
+<li>application state
+<ul>
+<li>program memory (stack + heap)</li>
+<li>usually managed by language runtime</li>
+</ul></li>
+<li>in-memory databases
+<ul>
+<li>provide access API</li>
+<li>may provide guarantees about integrity, consistency, visibility</li>
+<li>examples: sqlite (in-memory version), h2, many more</li>
+</ul></li>
+<li>both easy to use and fast access time</li>
+<li>drawbacks:
+<ul>
+<li>volatility (data loss on process stop/restart, overhead otherwise)</li>
+<li>small size</li>
+</ul></li>
+<li>popular for short lived data with fast access requirements</li>
+</ul>
+<h3 id="local-storage">local storage</h3>
+<ul>
+<li>file system (flat files)
+<ul>
+<li>advantages:
+<ul>
+<li>easy to use</li>
+<li>well supported</li>
+<li>persistent</li>
+<li>easy to backup</li>
+<li>large size</li>
+</ul></li>
+<li>disadvantages
+<ul>
+<li>unindexed</li>
+<li>unstructures</li>
+<li>no guarantees for concurrent writes etc</li>
+</ul></li>
+<li>popular for simple applications</li>
+</ul></li>
+<li>databases
+<ul>
+<li>advantages:
+<ul>
+<li>data is structured</li>
+<li>indexed</li>
+<li>allow complex search operations</li>
+<li>allow relational data</li>
+<li>large size</li>
+<li>transaction support -&gt; consistency</li>
+<li>usually allow distributed setups</li>
+<li>integration with other services through standard interfaces (SQL)</li>
+</ul></li>
+<li>drawbacks:
+<ul>
+<li>complex API</li>
+<li>complex management and administration</li>
+</ul></li>
+<li>popular for complex structured application data
+<ul>
+<li>relational databases like postgresql, sqlite, mariadb</li>
+<li>noSQL databases, such as k/v stores, document or graph databases</li>
+</ul></li>
+</ul></li>
+</ul>
+<h3 id="remote-storage">remote storage</h3>
+<ul>
+<li>information systems like CRMs</li>
+<li>external web services (database server, remote FS)</li>
+</ul>
 <h1 id="session-management">Session Management</h1>
 <h1 id="client-side-developments">Client-side Developments</h1>
 <h1 id="object-relational-mapping">Object-relational Mapping</h1>
