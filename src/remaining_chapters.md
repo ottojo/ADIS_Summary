@@ -1,4 +1,3 @@
-# Client-side Developments
 # Object-relational Mapping
 # Structured Developments
 # RIA and SPA

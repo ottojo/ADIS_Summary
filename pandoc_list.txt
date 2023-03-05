@@ -4,5 +4,6 @@ src/c-dynamic_web_content.md
 src/d-server_side_scripting.md
 src/e-data_management.md
 src/f-session_management.md
+src/g-client_side_developments.md
 src/remaining_chapters.md
 metadata.yaml
