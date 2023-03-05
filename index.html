@@ -62,7 +62,13 @@
 <li><a href="#remote-storage">remote storage</a></li>
 </ul></li>
 </ul></li>
-<li><a href="#session-management">Session Management</a></li>
+<li><a href="#session-management">Session Management</a>
+<ul>
+<li><a href="#url-session-identifiers">URL Session Identifiers</a></li>
+<li><a href="#cookies">Cookies</a></li>
+<li><a href="#session-state">Session State</a></li>
+<li><a href="#securtity">Securtity</a></li>
+</ul></li>
 <li><a href="#client-side-developments">Client-side Developments</a></li>
 <li><a href="#object-relational-mapping">Object-relational Mapping</a></li>
 <li><a href="#structured-developments">Structured Developments</a></li>
@@ -359,6 +365,31 @@
 <li>external web services (database server, remote FS)</li>
 </ul>
 <h1 id="session-management">Session Management</h1>
+<p>Sessions provide state beyond individual HTTP requests. Example uses are multi-step forms, login status or shopping carts.</p>
+<p>This requires the server to identify subsequent requests belonging to the same user/session. A session is the list of consecutive actions of an individual user. This is usually implemented by labeling the requests, that label is called <em>Session ID</em> or <em>Session Token</em>. The ID is generated on the server side, and has to be unique and un-guessable (to prevent session hijacking). It is transmitted to the client in the first response, which then includes it in subsequent requests. This allows the server to relate it to the session.</p>
+<p>Sessions may end, either explicitly (discarding the session ID on server or client) or by timeout.</p>
+<h2 id="url-session-identifiers">URL Session Identifiers</h2>
+<p>Also called <em>URL rewriting</em>, this is a technique for handling session IDs. It works by embedding the ID in the URL, which requires the server to rewrite all hyperlinks in the response to include the ID.</p>
+<p>Advantages:</p>
+<ul>
+<li>No client support needed</li>
+<li>No additional headers required</li>
+<li>No cookies required</li>
+</ul>
+<p>Disadvantages:</p>
+<ul>
+<li>Security risk: Session ID easily exposed by sharing or logging an URL</li>
+<li>Correct rewriting might be difficult</li>
+</ul>
+<h2 id="cookies">Cookies</h2>
+<p>Cookies are small chunks of data (KV pairs) related to one domain, which the client includes for every request to the same domain. Cookies provide a more secure way to attach IDs to session.</p>
+<p>The server provides the cookies using <code>Set-Cookie</code> headers, which include the session ID.</p>
+<p>The client receives the cookie, saves it and sends it back to the server in subsequent requests using the <code>Cookie</code> header.</p>
+<h2 id="session-state">Session State</h2>
+<p>Once the server has the possibility to relate requests to sessions, session state can be stored. This session state can be arbitrary, and would usually stored in a database indexed by the session ID.</p>
+<p>In principle, the entire state could be stored in a cookie, which eliminates the need for server-side storage but has several drawbacks such as limited size and the possibility for the client to modify the state in unexpected ways.</p>
+<h2 id="securtity">Securtity</h2>
+<p>There are multiple security considerations regarding sessions, in particular Leaking the ID, which can lead to session hijacking and thus impersonating the user</p>
 <h1 id="client-side-developments">Client-side Developments</h1>
 <h1 id="object-relational-mapping">Object-relational Mapping</h1>
 <h1 id="structured-developments">Structured Developments</h1>
