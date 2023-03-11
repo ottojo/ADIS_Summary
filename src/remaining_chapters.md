@@ -1,4 +1,3 @@
-# Structured Developments
 # RIA and SPA
 # Node.js and Unification of Languages
 # Component-based Frameworks
