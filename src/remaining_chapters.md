@@ -1,4 +1,3 @@
-# RIA and SPA
 # Node.js and Unification of Languages
 # Component-based Frameworks
 # Progressive Web Applications

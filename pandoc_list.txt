@@ -7,5 +7,6 @@ src/f-session_management.md
 src/g-client_side_developments.md
 src/h-object_relational_mapping.md
 src/i-structured_development.md
+src/j-ria_and_spa.md
 src/remaining_chapters.md
 metadata.yaml
