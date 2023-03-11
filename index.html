@@ -85,7 +85,12 @@
 <li><a href="#structured-project-directories">Structured Project Directories</a></li>
 </ul></li>
 </ul></li>
-<li><a href="#ria-and-spa">RIA and SPA</a></li>
+<li><a href="#ria-and-spa">RIA and SPA</a>
+<ul>
+<li><a href="#thin-vs.-thick-clients">Thin vs. Thick Clients</a></li>
+<li><a href="#rich-internet-applications-ria">Rich Internet Applications (RIA)</a></li>
+<li><a href="#single-page-applications-spa">Single Page Applications (SPA)</a></li>
+</ul></li>
 <li><a href="#node.js-and-unification-of-languages">Node.js and Unification of Languages</a></li>
 <li><a href="#component-based-frameworks">Component-based Frameworks</a></li>
 <li><a href="#progressive-web-applications">Progressive Web Applications</a></li>
@@ -472,6 +477,41 @@
 <li>Frameworks sometimes provide generation of project scaffolding (Django, Ruby on Rails)</li>
 </ul>
 <h1 id="ria-and-spa">RIA and SPA</h1>
+<h2 id="thin-vs.-thick-clients">Thin vs. Thick Clients</h2>
+<p>In thin-client applications, the browser only handles inputs and renders responses from the server. Interactions between client and server are HTTP requests.</p>
+<p>Thick-client applications move some business logic to the client side. This typically allows for improvements in user experience. Some actions are executed locally without server interaction. Other interactions with the server might be application specific, once the client application is loaded.</p>
+<h2 id="rich-internet-applications-ria">Rich Internet Applications (RIA)</h2>
+<p>Basic idea: Resemble user experience of local desktop application. This requires running some logic on the client side. An extreme example would be a client side game engine running in the browser. RIAs allow platform independence, which might be an advantage compared to native applications.</p>
+<p>Examples of RIAs:</p>
+<ul>
+<li>Google Docs</li>
+<li>Web mail clients</li>
+<li>Flash games</li>
+</ul>
+<p>Frameworks are available for both client- and server-side programming.</p>
+<p>Today, RIA are “rich web applications”, using native web technologies such as HTML(5), CSS and JS.</p>
+<h2 id="single-page-applications-spa">Single Page Applications (SPA)</h2>
+<p>SPAs are thick clients, using current web technologies (HTML5, CSS3) and modern web APIs using JS. The page is loaded only once, and the application dynamically modifies the current page based on user input, instead of loading new pages. Interaction with the server is done in the background.</p>
+<p>Technologies used:</p>
+<ul>
+<li>Communication
+<ul>
+<li>Regular HTTP request for initial load</li>
+<li>AJAX/fetch, server-push or WS for later communication</li>
+</ul></li>
+<li>Data formats
+<ul>
+<li>JSON and XML for structured data</li>
+<li>Alternative: pre-generated HTML from the server</li>
+</ul></li>
+</ul>
+<p>Challenges include:</p>
+<ul>
+<li>Slow initial loading time</li>
+<li>Programmatic access e.g. for search engines</li>
+<li>Handling of application state vs page location</li>
+<li>Partitioning of logic between client and server</li>
+</ul>
 <h1 id="node.js-and-unification-of-languages">Node.js and Unification of Languages</h1>
 <h1 id="component-based-frameworks">Component-based Frameworks</h1>
 <h1 id="progressive-web-applications">Progressive Web Applications</h1>
