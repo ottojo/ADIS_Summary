@@ -32,7 +32,7 @@
 * Avoid 1:1 mapping between connections and threads
 * Using asynchronous and non-blocking I/O (reduces number of waiting threads)
 
-#### Reactor Pattern
+#### Reactor Pattern {#reactor-pattern}
 * Reactor: single thread with event-loop
   * reacts to IO events from a queue
   * dispatches events
