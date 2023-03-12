@@ -91,7 +91,13 @@
 <li><a href="#rich-internet-applications-ria">Rich Internet Applications (RIA)</a></li>
 <li><a href="#single-page-applications-spa">Single Page Applications (SPA)</a></li>
 </ul></li>
-<li><a href="#node.js-and-unification-of-languages">Node.js and Unification of Languages</a></li>
+<li><a href="#node.js-and-unification-of-languages">Node.js and Unification of Languages</a>
+<ul>
+<li><a href="#emerging-challenges">Emerging Challenges</a></li>
+<li><a href="#event-driven-web-application-runtime">Event-driven Web Application Runtime</a></li>
+<li><a href="#node.js">Node.js</a></li>
+<li><a href="#unification-of-languages">Unification of Languages</a></li>
+</ul></li>
 <li><a href="#component-based-frameworks">Component-based Frameworks</a></li>
 <li><a href="#progressive-web-applications">Progressive Web Applications</a></li>
 <li><a href="#popular-implementations">Popular Implementations</a></li>
@@ -513,6 +519,40 @@
 <li>Partitioning of logic between client and server</li>
 </ul>
 <h1 id="node.js-and-unification-of-languages">Node.js and Unification of Languages</h1>
+<h2 id="emerging-challenges">Emerging Challenges</h2>
+<ul>
+<li>Scalability: C10k-like problems for dynamic content</li>
+<li>Coordination between server and client, with many clients</li>
+<li>Interaction between concurrent requests</li>
+<li>Near-real-time information distribution</li>
+</ul>
+<p>A traditional web application usually features</p>
+<ul>
+<li>Isolation of individual requests at the server</li>
+<li>Application state exclusively in database</li>
+</ul>
+<p>while a modern application wants to use techniques such as long polling, wherein the server delays a response until some event has occurred (such as a new chat message being sent). This requires a new programming model with</p>
+<ul>
+<li>Explicit concurrency support (inter-request interactions)</li>
+<li>Support for long-running and event-triggered requests</li>
+<li>Scalability for dynamic content generation</li>
+</ul>
+<h2 id="event-driven-web-application-runtime">Event-driven Web Application Runtime</h2>
+<p>This model extends the <a href="#reactor-pattern">reactor pattern</a> by allowing the event loop to execute arbitrary application code such as making database queries and generating HTML output.</p>
+<h2 id="node.js">Node.js</h2>
+<ul>
+<li>Asynchronous, event-driven JS runtime</li>
+<li>JS is used because it does not have a threading model or standard IO functionality, as all those are provided exclusively by the runtime</li>
+<li>Extensive use of callbacks</li>
+<li>Framework <code>express</code> simplifies HTTP server creation</li>
+<li>All callbacks executed sequentially</li>
+<li><code>events</code> library provides inter-request interaction</li>
+<li><code>npm</code> package manager and package registry</li>
+</ul>
+<h2 id="unification-of-languages">Unification of Languages</h2>
+<p>Using the same programming language for client and server has many advantages, such as easier debugging and less duplication of server and client code.</p>
+<p>A full JS stack has the advantage of not requiring transpilation or code generation for the client side. Also, developers might already be familiar with JS because of its prominence for frontend code.</p>
+<p>Popular JS stack “MEAN”: MongoDB, Express, AngularJS, Node.js.</p>
 <h1 id="component-based-frameworks">Component-based Frameworks</h1>
 <h1 id="progressive-web-applications">Progressive Web Applications</h1>
 <h1 id="popular-implementations">Popular Implementations</h1>
