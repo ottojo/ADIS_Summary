@@ -613,6 +613,55 @@
 <li>Some frameworks allow export to web components</li>
 </ul>
 <h1 id="progressive-web-applications">Progressive Web Applications</h1>
+<p>Principles of PWAs:</p>
+<ul>
+<li>discoverable: indexable by search engines</li>
+<li>installable: integrates with platform app-launcher/homescreen/whatever</li>
+<li>linkable: sharing via URI</li>
+<li>network independent: PWA can work offline or with limited connectivity</li>
+<li>progressive: basic feature set for old browser, extended features for new browsers
+<ul>
+<li>graceful degradation: mitigation techniques for missing features</li>
+<li>shims, polyfills: re-implementation of modern web APIs for browsers without native support in plain JS</li>
+<li>progressive enhancements: opposite of graceful degradation: upgrade basic functionality if available</li>
+<li>transpilation of modern JS to version compatible with older browser version</li>
+</ul></li>
+<li>re-engageable: can send notifications to users</li>
+<li>responsive: adapts to device and screen size</li>
+<li>safe: secure communication, protection of sensitive data</li>
+</ul>
+<p>Implementing PWAs:</p>
+<ul>
+<li>secure contexts
+<ul>
+<li>browser allows access to sensitive APIs only if requirements fulfilled</li>
+<li>requirements might be e.g. a secure connection</li>
+</ul></li>
+<li>web app manifests
+<ul>
+<li>declares information about web app such as
+<ul>
+<li>homescreen icons</li>
+<li>appearance options such as full-screen mode</li>
+<li>screen orientation</li>
+<li>system colors</li>
+</ul></li>
+<li>referenced by link from HTML header</li>
+</ul></li>
+<li>service workers
+<ul>
+<li>proxy between application and network</li>
+<li>implements:
+<ul>
+<li>offline support</li>
+<li>cache control</li>
+<li>pre-fetching resources</li>
+<li>background tasks such as data sync, push notifications</li>
+</ul></li>
+<li>fully asynchronous</li>
+<li>only available in secure context</li>
+</ul></li>
+</ul>
 <h1 id="popular-implementations">Popular Implementations</h1>
 <h1 id="introduction-to-scalability">Introduction to Scalability</h1>
 <h1 id="interactioncommunication">Interaction/Communication</h1>
