@@ -1,4 +1,3 @@
-# Popular Implementations
 # Introduction to Scalability
 # Interaction/Communication
 # State
