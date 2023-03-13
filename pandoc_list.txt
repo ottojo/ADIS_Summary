@@ -10,5 +10,6 @@ src/i-structured_development.md
 src/j-ria_and_spa.md
 src/k-nodejs_unification_of_languages.md
 src/l-component_based_frameworks.md
+src/m-progressive_web_applications.md
 src/remaining_chapters.md
 metadata.yaml

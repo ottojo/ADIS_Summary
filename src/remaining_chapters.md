@@ -1,4 +1,3 @@
-# Progressive Web Applications
 # Popular Implementations
 # Introduction to Scalability
 # Interaction/Communication
