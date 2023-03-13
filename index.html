@@ -98,7 +98,11 @@
 <li><a href="#node.js">Node.js</a></li>
 <li><a href="#unification-of-languages">Unification of Languages</a></li>
 </ul></li>
-<li><a href="#component-based-frameworks">Component-based Frameworks</a></li>
+<li><a href="#component-based-frameworks">Component-based Frameworks</a>
+<ul>
+<li><a href="#web-components-specification">Web Components Specification</a></li>
+<li><a href="#component-based-application-frameworks">Component-based Application Frameworks</a></li>
+</ul></li>
 <li><a href="#progressive-web-applications">Progressive Web Applications</a></li>
 <li><a href="#popular-implementations">Popular Implementations</a></li>
 <li><a href="#introduction-to-scalability">Introduction to Scalability</a></li>
@@ -554,6 +558,60 @@
 <p>A full JS stack has the advantage of not requiring transpilation or code generation for the client side. Also, developers might already be familiar with JS because of its prominence for frontend code.</p>
 <p>Popular JS stack “MEAN”: MongoDB, Express, AngularJS, Node.js.</p>
 <h1 id="component-based-frameworks">Component-based Frameworks</h1>
+<p>This focuses on web component for the client side.</p>
+<ul>
+<li>Components are reusable view elements, which is desirable to avoid re-implementing features</li>
+<li>No standard way for re-using HTML blocks, templating</li>
+</ul>
+<h2 id="web-components-specification">Web Components Specification</h2>
+<ul>
+<li>Standardized 2012</li>
+</ul>
+<p>Building blocks:</p>
+<ul>
+<li>Custom Elements API: Custom DOM elements
+<ul>
+<li>associated JS class for behavior</li>
+<li>callbacks for insertion, removal etc</li>
+</ul></li>
+<li>Shadow DOM: Scoped DOM, encapsulating style + markup
+<ul>
+<li>hides implementation of components</li>
+<li>page styles not applied to shadow dom, shadow dom styles not applied on page level</li>
+</ul></li>
+<li>HTML Templates: Declare HTML fragments, instantiate at runtime
+<ul>
+<li><code>&lt;slot&gt;</code> allows injection of instance specific data</li>
+</ul></li>
+<li>ES Modules: reuse of JS documents</li>
+</ul>
+<h2 id="component-based-application-frameworks">Component-based Application Frameworks</h2>
+<p>Those don’t use the standard components directly, but implement similar concepts.</p>
+<ul>
+<li>Angular
+<ul>
+<li>Declarative HTML templates</li>
+<li>Typescript for defining components, which references HTML and CSS</li>
+<li></li>
+</ul></li>
+<li>React
+<ul>
+<li>JSX templates: functional instead of declarative</li>
+<li>components as state machines</li>
+<li>no scoped styles</li>
+</ul></li>
+<li>Vue.js
+<ul>
+<li>Declarative HTML templates</li>
+</ul></li>
+</ul>
+<p>Standard Components vs Frameworks:</p>
+<ul>
+<li>Component support is builtin to browsers</li>
+<li>Frameworks often more feature-rich</li>
+<li>Frameworks provide virtual DOM</li>
+<li>Some frameworks allow export to web components</li>
+</ul>
 <h1 id="progressive-web-applications">Progressive Web Applications</h1>
 <h1 id="popular-implementations">Popular Implementations</h1>
 <h1 id="introduction-to-scalability">Introduction to Scalability</h1>
