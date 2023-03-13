@@ -1,4 +1,3 @@
-# Component-based Frameworks
 # Progressive Web Applications
 # Popular Implementations
 # Introduction to Scalability
