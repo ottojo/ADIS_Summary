@@ -1,4 +1,3 @@
-# Introduction to Scalability
 # Interaction/Communication
 # State
 # Logic
