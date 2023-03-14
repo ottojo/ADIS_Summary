@@ -10,7 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Install pandoc
-        run: sudo apt install -y pandoc
+        run: wget https://github.com/jgm/pandoc/releases/download/3.1.1/pandoc-3.1.1-1-amd64.deb && sudo apt install -y pandoc-3.1.1-1-amd64.deb
       - name: Build document
         run: make html
       - name: Collect build outputs
