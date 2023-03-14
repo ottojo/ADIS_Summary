@@ -16,6 +16,7 @@
     ul.task-list{list-style: none;}
   </style>
   <link rel="stylesheet" href="styling.css" />
+  <script src="/usr/share/javascript/mathjax/tex-mml-chtml.js" type="text/javascript"></script>
 </head>
 <body>
 <header id="title-block-header">
@@ -105,7 +106,15 @@
 </ul></li>
 <li><a href="#progressive-web-applications">Progressive Web Applications</a></li>
 <li><a href="#popular-implementations">Popular Implementations</a></li>
-<li><a href="#introduction-to-scalability">Introduction to Scalability</a></li>
+<li><a href="#introduction-to-scalability">Introduction to Scalability</a>
+<ul>
+<li><a href="#part-1">Part 1</a>
+<ul>
+<li><a href="#client-side-performance-metrics">Client Side Performance Metrics</a></li>
+<li><a href="#server-side-performance-metrics">Server Side Performance Metrics</a></li>
+</ul></li>
+<li><a href="#part-2">Part 2</a></li>
+</ul></li>
 <li><a href="#interactioncommunication">Interaction/Communication</a></li>
 <li><a href="#state">State</a></li>
 <li><a href="#logic">Logic</a></li>
@@ -665,6 +674,36 @@
 <h1 id="popular-implementations">Popular Implementations</h1>
 <p>This section has been skipped due to an unbearable amount of Java EE content.</p>
 <h1 id="introduction-to-scalability">Introduction to Scalability</h1>
+<h2 id="part-1">Part 1</h2>
+<p>The main requirements for a large scale web application are</p>
+<ul>
+<li>reliability</li>
+<li>scalability</li>
+<li>maintainability</li>
+</ul>
+<p>A scalable system is able to cope with varying load. This might require utilizing additional resources, or graceful degradation in case of temporary overload. Scalability is not the same as performance, as a system which has good performance for a single user it might still not scale well for large numbers of users.</p>
+<h3 id="client-side-performance-metrics">Client Side Performance Metrics</h3>
+<ul>
+<li>DNS lookup time</li>
+<li>Time to first byte TTFB</li>
+<li>Time to first contentful paint (FCP)</li>
+<li>Time to start render</li>
+<li>Time to interactive (TTI)</li>
+</ul>
+<h3 id="server-side-performance-metrics">Server Side Performance Metrics</h3>
+<ul>
+<li>request throughput (requests per second)</li>
+<li>response times (time between receiving request and responding)</li>
+<li>hardware utilization</li>
+<li>availability</li>
+<li>uptime</li>
+</ul>
+<h4 id="response-times">Response Times</h4>
+<p>Both average and peak response time can be measured.. However, those statistics are of limited relevance, since the distribution is usually not normal or uniform. A better way of assessing response times are percentiles (99% of all responses arrive within <span class="math inline">\(p_{99}\)</span>). Percentile plots (hockey stick plots) allow comparing response times of multiple systems.</p>
+<h4 id="throughput-vs-response-time">Throughput vs Response Time</h4>
+<p>Under load, increased throughput negatively affects response times. This might be due to requests being queued for example.</p>
+<h2 id="part-2">Part 2</h2>
+<p>(TODO)</p>
 <h1 id="interactioncommunication">Interaction/Communication</h1>
 <h1 id="state">State</h1>
 <h1 id="logic">Logic</h1>
