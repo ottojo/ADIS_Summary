@@ -183,7 +183,13 @@ Metrics</a></li>
 id="toc-server-side-performance-metrics">Server Side Performance
 Metrics</a></li>
 </ul></li>
-<li><a href="#part-2" id="toc-part-2">Part 2</a></li>
+<li><a href="#part-2" id="toc-part-2">Part 2</a>
+<ul>
+<li><a href="#load-characteristics" id="toc-load-characteristics">Load
+Characteristics</a></li>
+<li><a href="#scalability-strategies"
+id="toc-scalability-strategies">Scalability Strategies</a></li>
+</ul></li>
 </ul></li>
 <li><a href="#interactioncommunication"
 id="toc-interactioncommunication">Interaction/Communication</a></li>
@@ -937,7 +943,82 @@ plots) allow comparing response times of multiple systems.</p>
 <p>Under load, increased throughput negatively affects response times.
 This might be due to requests being queued for example.</p>
 <h2 id="part-2">Part 2</h2>
-<p>(TODO)</p>
+<h3 id="load-characteristics">Load Characteristics</h3>
+<p>Load: externally assigned work for the system</p>
+<p>Load is characterized by load parameters:</p>
+<ul>
+<li>web server load
+<ul>
+<li>number of requests</li>
+<li>type of requests</li>
+<li>target URIs</li>
+</ul></li>
+<li>application backend load
+<ul>
+<li>application specific, e.g. ratio of read/write DB operations</li>
+</ul></li>
+</ul>
+<p>Roary example load parameters:</p>
+<ul>
+<li>add-post operations per second</li>
+<li>view-post operations per second</li>
+<li>ratio between both</li>
+</ul>
+<p>secondary load parameters in this example might be the number of
+followers and subscriptions per user, or the distribution of those among
+the user-base.</p>
+<h3 id="scalability-strategies">Scalability Strategies</h3>
+<ul>
+<li>Scale-Up (vertical): Adding more resources to existing machines
+<ul>
+<li>inherent physical limits</li>
+</ul></li>
+<li>Scale-Out (horizontal): Adding more machines
+<ul>
+<li>requires distribution</li>
+</ul></li>
+</ul>
+<h4 id="scale-cube">Scale Cube</h4>
+<p>Axes:</p>
+<ul>
+<li>horizontal duplication
+<ul>
+<li>cloning services</li>
+<li>replicating instances such as DBs</li>
+<li>load-balancing between entities</li>
+</ul></li>
+<li>functional decomposition
+<ul>
+<li>separation of services</li>
+<li>partitioning of data sets</li>
+</ul></li>
+<li>data partitioning
+<ul>
+<li>sharding of service instances (dedicated instances for certain
+groups of users)</li>
+<li>distribute dataset based on key</li>
+</ul></li>
+</ul>
+<p>Example for scaling up users+products database:</p>
+<ul>
+<li>Replication of entire database allows more concurrent read
+operations</li>
+<li>Separating users and products tables into two instances increases
+capacity for each and allows independent scaling</li>
+<li>Splitting entire dataset into two databases by key</li>
+</ul>
+<p>All three approaches can be combined, even for this simple database
+example.</p>
+<h4 id="general-strategies">General Strategies</h4>
+<ul>
+<li>stateless components are easier to scale and replicate</li>
+<li>avoid single points of failure</li>
+<li>shared state makes replication and sharding difficult</li>
+<li>asynchronous services and calls prevent bottlenecks</li>
+<li>caching may be used on all architecture layers and can have huge
+benefits</li>
+<li>monitoring load and performance is crucial</li>
+</ul>
 <h1 id="interactioncommunication">Interaction/Communication</h1>
 <h1 id="state">State</h1>
 <h1 id="logic">Logic</h1>
