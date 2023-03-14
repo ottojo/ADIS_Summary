@@ -10,13 +10,24 @@
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
-    span.underline{text-decoration: underline;}
-    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
   </style>
   <link rel="stylesheet" href="styling.css" />
-  <script src="/usr/share/javascript/mathjax/tex-mml-chtml.js" type="text/javascript"></script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"
+  type="text/javascript"></script>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
 </head>
 <body>
 <header id="title-block-header">
@@ -26,106 +37,174 @@
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
-<li><a href="#architectures-for-distributed-internet-services">Architectures for Distributed Internet Services</a></li>
-<li><a href="#static-web-content">Static Web Content</a>
+<li><a href="#architectures-for-distributed-internet-services"
+id="toc-architectures-for-distributed-internet-services">Architectures
+for Distributed Internet Services</a></li>
+<li><a href="#static-web-content" id="toc-static-web-content">Static Web
+Content</a>
 <ul>
-<li><a href="#web-servers">Web Servers</a>
+<li><a href="#web-servers" id="toc-web-servers">Web Servers</a>
 <ul>
-<li><a href="#static-content">Static Content</a></li>
-<li><a href="#architectures">Architectures</a></li>
+<li><a href="#static-content" id="toc-static-content">Static
+Content</a></li>
+<li><a href="#architectures"
+id="toc-architectures">Architectures</a></li>
 </ul></li>
 </ul></li>
-<li><a href="#dynamic-web-content">Dynamic Web Content</a>
+<li><a href="#dynamic-web-content" id="toc-dynamic-web-content">Dynamic
+Web Content</a>
 <ul>
-<li><a href="#client-side-dynamicity">Client-side dynamicity</a></li>
-<li><a href="#server-side-dynamicity">Server-side dynamicity</a></li>
-<li><a href="#creating-dynamic-web-content">Creating dynamic web content</a>
+<li><a href="#client-side-dynamicity"
+id="toc-client-side-dynamicity">Client-side dynamicity</a></li>
+<li><a href="#server-side-dynamicity"
+id="toc-server-side-dynamicity">Server-side dynamicity</a></li>
+<li><a href="#creating-dynamic-web-content"
+id="toc-creating-dynamic-web-content">Creating dynamic web content</a>
 <ul>
-<li><a href="#server-side-includes">Server Side Includes</a></li>
-<li><a href="#external-programs-cgi">External Programs: CGI</a></li>
-<li><a href="#alternative-fastcgi">Alternative: FastCGI</a></li>
-<li><a href="#scgi-simple-common-gateway-interface-alternative-to-fastcgi">SCGI (Simple Common Gateway Interface): Alternative to FastCGI</a></li>
-<li><a href="#problems-with-cgi">Problems with CGI</a></li>
+<li><a href="#server-side-includes" id="toc-server-side-includes">Server
+Side Includes</a></li>
+<li><a href="#external-programs-cgi"
+id="toc-external-programs-cgi">External Programs: CGI</a></li>
+<li><a href="#alternative-fastcgi"
+id="toc-alternative-fastcgi">Alternative: FastCGI</a></li>
+<li><a
+href="#scgi-simple-common-gateway-interface-alternative-to-fastcgi"
+id="toc-scgi-simple-common-gateway-interface-alternative-to-fastcgi">SCGI
+(Simple Common Gateway Interface): Alternative to FastCGI</a></li>
+<li><a href="#problems-with-cgi" id="toc-problems-with-cgi">Problems
+with CGI</a></li>
 </ul></li>
 </ul></li>
-<li><a href="#server-side-scripting">Server-side Scripting</a>
+<li><a href="#server-side-scripting"
+id="toc-server-side-scripting">Server-side Scripting</a>
 <ul>
-<li><a href="#example-perl">Example: Perl</a></li>
-<li><a href="#example-java">Example: Java</a></li>
-<li><a href="#example-php">Example: PHP</a></li>
+<li><a href="#example-perl" id="toc-example-perl">Example: Perl</a></li>
+<li><a href="#example-java" id="toc-example-java">Example: Java</a></li>
+<li><a href="#example-php" id="toc-example-php">Example: PHP</a></li>
 </ul></li>
-<li><a href="#data-management-sever-side-state">Data Management: Sever-Side State</a>
+<li><a href="#data-management-sever-side-state"
+id="toc-data-management-sever-side-state">Data Management: Sever-Side
+State</a>
 <ul>
-<li><a href="#storage-options">Storage Options</a>
+<li><a href="#storage-options" id="toc-storage-options">Storage
+Options</a>
 <ul>
-<li><a href="#main-memory">main memory</a></li>
-<li><a href="#local-storage">local storage</a></li>
-<li><a href="#remote-storage">remote storage</a></li>
-</ul></li>
-</ul></li>
-<li><a href="#session-management">Session Management</a>
-<ul>
-<li><a href="#url-session-identifiers">URL Session Identifiers</a></li>
-<li><a href="#cookies">Cookies</a></li>
-<li><a href="#session-state">Session State</a></li>
-<li><a href="#securtity">Securtity</a></li>
-</ul></li>
-<li><a href="#client-side-developments">Client-side Developments</a></li>
-<li><a href="#object-relational-mapping">Object-Relational Mapping</a></li>
-<li><a href="#structured-developments">Structured Developments</a>
-<ul>
-<li><a href="#mvc">MVC</a>
-<ul>
-<li><a href="#summary">Summary</a></li>
-</ul></li>
-<li><a href="#some-more-structural-patterns">Some more structural patterns</a>
-<ul>
-<li><a href="#inversion-of-control-ioc">Inversion of Control (IoC)</a></li>
-<li><a href="#dont-repeat-yourself">Don’t Repeat Yourself</a></li>
-<li><a href="#convention-over-configuration">Convention Over Configuration</a></li>
-<li><a href="#structured-project-directories">Structured Project Directories</a></li>
+<li><a href="#main-memory" id="toc-main-memory">main memory</a></li>
+<li><a href="#local-storage" id="toc-local-storage">local
+storage</a></li>
+<li><a href="#remote-storage" id="toc-remote-storage">remote
+storage</a></li>
 </ul></li>
 </ul></li>
-<li><a href="#ria-and-spa">RIA and SPA</a>
+<li><a href="#session-management" id="toc-session-management">Session
+Management</a>
 <ul>
-<li><a href="#thin-vs.-thick-clients">Thin vs. Thick Clients</a></li>
-<li><a href="#rich-internet-applications-ria">Rich Internet Applications (RIA)</a></li>
-<li><a href="#single-page-applications-spa">Single Page Applications (SPA)</a></li>
+<li><a href="#url-session-identifiers"
+id="toc-url-session-identifiers">URL Session Identifiers</a></li>
+<li><a href="#cookies" id="toc-cookies">Cookies</a></li>
+<li><a href="#session-state" id="toc-session-state">Session
+State</a></li>
+<li><a href="#securtity" id="toc-securtity">Securtity</a></li>
 </ul></li>
-<li><a href="#node.js-and-unification-of-languages">Node.js and Unification of Languages</a>
+<li><a href="#client-side-developments"
+id="toc-client-side-developments">Client-side Developments</a></li>
+<li><a href="#object-relational-mapping"
+id="toc-object-relational-mapping">Object-Relational Mapping</a></li>
+<li><a href="#structured-developments"
+id="toc-structured-developments">Structured Developments</a>
 <ul>
-<li><a href="#emerging-challenges">Emerging Challenges</a></li>
-<li><a href="#event-driven-web-application-runtime">Event-driven Web Application Runtime</a></li>
-<li><a href="#node.js">Node.js</a></li>
-<li><a href="#unification-of-languages">Unification of Languages</a></li>
-</ul></li>
-<li><a href="#component-based-frameworks">Component-based Frameworks</a>
+<li><a href="#mvc" id="toc-mvc">MVC</a>
 <ul>
-<li><a href="#web-components-specification">Web Components Specification</a></li>
-<li><a href="#component-based-application-frameworks">Component-based Application Frameworks</a></li>
+<li><a href="#summary" id="toc-summary">Summary</a></li>
 </ul></li>
-<li><a href="#progressive-web-applications">Progressive Web Applications</a></li>
-<li><a href="#popular-implementations">Popular Implementations</a></li>
-<li><a href="#introduction-to-scalability">Introduction to Scalability</a>
+<li><a href="#some-more-structural-patterns"
+id="toc-some-more-structural-patterns">Some more structural patterns</a>
 <ul>
-<li><a href="#part-1">Part 1</a>
+<li><a href="#inversion-of-control-ioc"
+id="toc-inversion-of-control-ioc">Inversion of Control (IoC)</a></li>
+<li><a href="#dont-repeat-yourself" id="toc-dont-repeat-yourself">Don’t
+Repeat Yourself</a></li>
+<li><a href="#convention-over-configuration"
+id="toc-convention-over-configuration">Convention Over
+Configuration</a></li>
+<li><a href="#structured-project-directories"
+id="toc-structured-project-directories">Structured Project
+Directories</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#ria-and-spa" id="toc-ria-and-spa">RIA and SPA</a>
 <ul>
-<li><a href="#client-side-performance-metrics">Client Side Performance Metrics</a></li>
-<li><a href="#server-side-performance-metrics">Server Side Performance Metrics</a></li>
+<li><a href="#thin-vs.-thick-clients"
+id="toc-thin-vs.-thick-clients">Thin vs. Thick Clients</a></li>
+<li><a href="#rich-internet-applications-ria"
+id="toc-rich-internet-applications-ria">Rich Internet Applications
+(RIA)</a></li>
+<li><a href="#single-page-applications-spa"
+id="toc-single-page-applications-spa">Single Page Applications
+(SPA)</a></li>
 </ul></li>
-<li><a href="#part-2">Part 2</a></li>
+<li><a href="#node.js-and-unification-of-languages"
+id="toc-node.js-and-unification-of-languages">Node.js and Unification of
+Languages</a>
+<ul>
+<li><a href="#emerging-challenges" id="toc-emerging-challenges">Emerging
+Challenges</a></li>
+<li><a href="#event-driven-web-application-runtime"
+id="toc-event-driven-web-application-runtime">Event-driven Web
+Application Runtime</a></li>
+<li><a href="#node.js" id="toc-node.js">Node.js</a></li>
+<li><a href="#unification-of-languages"
+id="toc-unification-of-languages">Unification of Languages</a></li>
 </ul></li>
-<li><a href="#interactioncommunication">Interaction/Communication</a></li>
-<li><a href="#state">State</a></li>
-<li><a href="#logic">Logic</a></li>
-<li><a href="#deploymentinfrastructure">Deployment/Infrastructure</a></li>
-<li><a href="#security-and-privacy">Security and Privacy</a></li>
-<li><a href="#devops">DevOps</a></li>
+<li><a href="#component-based-frameworks"
+id="toc-component-based-frameworks">Component-based Frameworks</a>
+<ul>
+<li><a href="#web-components-specification"
+id="toc-web-components-specification">Web Components
+Specification</a></li>
+<li><a href="#component-based-application-frameworks"
+id="toc-component-based-application-frameworks">Component-based
+Application Frameworks</a></li>
+</ul></li>
+<li><a href="#progressive-web-applications"
+id="toc-progressive-web-applications">Progressive Web
+Applications</a></li>
+<li><a href="#popular-implementations"
+id="toc-popular-implementations">Popular Implementations</a></li>
+<li><a href="#introduction-to-scalability"
+id="toc-introduction-to-scalability">Introduction to Scalability</a>
+<ul>
+<li><a href="#part-1" id="toc-part-1">Part 1</a>
+<ul>
+<li><a href="#client-side-performance-metrics"
+id="toc-client-side-performance-metrics">Client Side Performance
+Metrics</a></li>
+<li><a href="#server-side-performance-metrics"
+id="toc-server-side-performance-metrics">Server Side Performance
+Metrics</a></li>
+</ul></li>
+<li><a href="#part-2" id="toc-part-2">Part 2</a></li>
+</ul></li>
+<li><a href="#interactioncommunication"
+id="toc-interactioncommunication">Interaction/Communication</a></li>
+<li><a href="#state" id="toc-state">State</a></li>
+<li><a href="#logic" id="toc-logic">Logic</a></li>
+<li><a href="#deploymentinfrastructure"
+id="toc-deploymentinfrastructure">Deployment/Infrastructure</a></li>
+<li><a href="#security-and-privacy"
+id="toc-security-and-privacy">Security and Privacy</a></li>
+<li><a href="#devops" id="toc-devops">DevOps</a></li>
 </ul>
 </nav>
-<h1 id="architectures-for-distributed-internet-services">Architectures for Distributed Internet Services</h1>
-<p>This is my summary for the lecture “Architectures for Distributed Internet Services”, as held by Franz Hauck and Benjamin Erb in 2022 at Ulm University.</p>
-<p>The HTML version of this summary can be found at <a href="https://ottojo.github.io/ADIS_Summary/">https://ottojo.github.io/ADIS_Summary/</a>, the sources are on GitHub at <a href="https://github.com/ottojo/ADIS_Summary">https://github.com/ottojo/ADIS_Summary</a>.</p>
+<h1 id="architectures-for-distributed-internet-services">Architectures
+for Distributed Internet Services</h1>
+<p>This is my summary for the lecture “Architectures for Distributed
+Internet Services”, as held by Franz Hauck and Benjamin Erb in 2022 at
+Ulm University.</p>
+<p>The HTML version of this summary can be found at <a
+href="https://ottojo.github.io/ADIS_Summary/">https://ottojo.github.io/ADIS_Summary/</a>,
+the sources are on GitHub at <a
+href="https://github.com/ottojo/ADIS_Summary">https://github.com/ottojo/ADIS_Summary</a>.</p>
 <h1 id="static-web-content">Static Web Content</h1>
 <h2 id="web-servers">Web Servers</h2>
 <ul>
@@ -149,7 +228,8 @@
 <li>Immutable content (images, videos, static pages)</li>
 <li>Static assets (stylesheets, JS sources)</li>
 </ul></li>
-<li>Server performance in this case predominantly I/O-bound (both disk and network)</li>
+<li>Server performance in this case predominantly I/O-bound (both disk
+and network)</li>
 </ul>
 <h3 id="architectures">Architectures</h3>
 <h4 id="multi-thread-multi-process">multi-thread / multi-process</h4>
@@ -158,14 +238,18 @@
 <li>Dedicated thread per connections (spawned by first thread)</li>
 <li>Allows multiple concurrent connections</li>
 <li>Synchronous, blocking IO may be used</li>
-<li>Large number of connections make efficient scheduling challenging</li>
-<li>-&gt; C10k Problem: Challenge of handling 10k concurrent connections to a server (early 2000s, now: C1M scale and beyond)</li>
+<li>Large number of connections make efficient scheduling
+challenging</li>
+<li>-&gt; C10k Problem: Challenge of handling 10k concurrent connections
+to a server (early 2000s, now: C1M scale and beyond)</li>
 </ul>
-<h4 id="solutions-for-the-c10k-problem">Solutions for the C10k Problem</h4>
+<h4 id="solutions-for-the-c10k-problem">Solutions for the C10k
+Problem</h4>
 <ul>
 <li>Avoid spawning many processes</li>
 <li>Avoid 1:1 mapping between connections and threads</li>
-<li>Using asynchronous and non-blocking I/O (reduces number of waiting threads)</li>
+<li>Using asynchronous and non-blocking I/O (reduces number of waiting
+threads)</li>
 </ul>
 <h4 id="reactor-pattern">Reactor Pattern</h4>
 <ul>
@@ -204,11 +288,13 @@
 </ul>
 <h2 id="creating-dynamic-web-content">Creating dynamic web content</h2>
 <ul>
-<li>some program takes http requests as input and produces web resources (HTML) as output
+<li>some program takes http requests as input and produces web resources
+(HTML) as output
 <ul>
 <li>e.g. java servelet</li>
 </ul></li>
-<li>code may be embedded into web resource, inserting code output into resource
+<li>code may be embedded into web resource, inserting code output into
+resource
 <ul>
 <li>e.g. java server faces, PHP</li>
 </ul></li>
@@ -220,12 +306,15 @@
 </ul>
 <h3 id="external-programs-cgi">External Programs: CGI</h3>
 <ul>
-<li>Specifies interaction between webserver and external programs (CGI scripts)</li>
+<li>Specifies interaction between webserver and external programs (CGI
+scripts)</li>
 <li>Server spawns new process for each request</li>
 <li>HTTP headers passed via env variables</li>
 <li>HTTP body passed via stdin</li>
-<li>CGI script may produce entire HTTP response, or only essential headers and body (remaining data added by server)</li>
-<li>Modules for interacting with CGI webserver exist in programming languages, such as CGI.pm in perl</li>
+<li>CGI script may produce entire HTTP response, or only essential
+headers and body (remaining data added by server)</li>
+<li>Modules for interacting with CGI webserver exist in programming
+languages, such as CGI.pm in perl</li>
 </ul>
 <p>Drawbacks:</p>
 <ul>
@@ -238,13 +327,16 @@
 <li>Binary protocol</li>
 <li>via unix socket/named pipe/tcp connection</li>
 <li>Script keeps running and processes multiple request</li>
-<li>Multiple (remote) FastCGI applications may be running and accessed by single web server
+<li>Multiple (remote) FastCGI applications may be running and accessed
+by single web server
 <ul>
 <li>allows load balancing</li>
 <li>separates web and application server</li>
 </ul></li>
 </ul>
-<h3 id="scgi-simple-common-gateway-interface-alternative-to-fastcgi">SCGI (Simple Common Gateway Interface): Alternative to FastCGI</h3>
+<h3
+id="scgi-simple-common-gateway-interface-alternative-to-fastcgi">SCGI
+(Simple Common Gateway Interface): Alternative to FastCGI</h3>
 <ul>
 <li>Simplifies interface: non-binary interface</li>
 <li>Easier to implement than FastCGI</li>
@@ -256,7 +348,9 @@
 </ul>
 <h1 id="server-side-scripting">Server-side Scripting</h1>
 <p>Scenario: Static HTML page should be enriched by dynamic content.</p>
-<p>Here, inside-out scripting is considered. This means scripts are placed inside HTML document. The script output is inserted at their location in the HTML document.</p>
+<p>Here, inside-out scripting is considered. This means scripts are
+placed inside HTML document. The script output is inserted at their
+location in the HTML document.</p>
 <p>Execution of the scripts:</p>
 <ul>
 <li>External script interpreter, spawned by server</li>
@@ -268,7 +362,9 @@
 <li>Server-internal script handling</li>
 </ul>
 <p>Inside-out scripting allows HTML-centric development approach.</p>
-<p>Self-processing pages are a pattern for processing form data on the same page it is displayed on. This is done by distinguishing between GET/POST request during script execution.</p>
+<p>Self-processing pages are a pattern for processing form data on the
+same page it is displayed on. This is done by distinguishing between
+GET/POST request during script execution.</p>
 <h2 id="example-perl">Example: Perl</h2>
 <ul>
 <li>Approach 1
@@ -285,17 +381,22 @@
 <h2 id="example-java">Example: Java</h2>
 <ul>
 <li>Inside-out scripting approach</li>
-<li>Before execution, JSP-to-Java transformation transforms HTML with embedded scripts to Java program (“Servlet”) which outputs entire page, containing static and dynamic content.</li>
+<li>Before execution, JSP-to-Java transformation transforms HTML with
+embedded scripts to Java program (“Servlet”) which outputs entire page,
+containing static and dynamic content.</li>
 <li>Generated Servlet allows ahead-of-time compilation</li>
 </ul>
 <h2 id="example-php">Example: PHP</h2>
 <ul>
 <li>Designed for inside-out scripting</li>
 <li>Execution environment included in web servers like apache</li>
-<li>Includes useful functionality for web-dev (databases, HTTP, etc)</li>
+<li>Includes useful functionality for web-dev (databases, HTTP,
+etc)</li>
 </ul>
-<h1 id="data-management-sever-side-state">Data Management: Sever-Side State</h1>
-<p>Data is stored both on server and client, and data is exchanged in requests and responses. Examples for client data include:</p>
+<h1 id="data-management-sever-side-state">Data Management: Sever-Side
+State</h1>
+<p>Data is stored both on server and client, and data is exchanged in
+requests and responses. Examples for client data include:</p>
 <ul>
 <li>Cached resources</li>
 <li>Cookies</li>
@@ -307,7 +408,8 @@
 <li>Session state</li>
 <li>Application state</li>
 </ul>
-<p>The server holds <em>static</em> resources and <em>dynamic</em> application state. Application state may include:</p>
+<p>The server holds <em>static</em> resources and <em>dynamic</em>
+application state. Application state may include:</p>
 <ul>
 <li>User accounts and preferences</li>
 <li>Dynamically generated content
@@ -327,7 +429,8 @@
 <li>storage duration</li>
 <li>access patterns</li>
 </ul>
-<p>Resulting from those aspects are design choices regarding server-side state:</p>
+<p>Resulting from those aspects are design choices regarding server-side
+state:</p>
 <h2 id="storage-options">Storage Options</h2>
 <p>Options are:</p>
 <h3 id="main-memory">main memory</h3>
@@ -346,7 +449,8 @@
 <li>both easy to use and fast access time</li>
 <li>drawbacks:
 <ul>
-<li>volatility (data loss on process stop/restart, overhead otherwise)</li>
+<li>volatility (data loss on process stop/restart, overhead
+otherwise)</li>
 <li>small size</li>
 </ul></li>
 <li>popular for short lived data with fast access requirements</li>
@@ -382,7 +486,8 @@
 <li>large size</li>
 <li>transaction support -&gt; consistency</li>
 <li>usually allow distributed setups</li>
-<li>integration with other services through standard interfaces (SQL)</li>
+<li>integration with other services through standard interfaces
+(SQL)</li>
 </ul></li>
 <li>drawbacks:
 <ul>
@@ -392,7 +497,8 @@
 <li>popular for complex structured application data
 <ul>
 <li>relational databases like postgresql, sqlite, mariadb</li>
-<li>noSQL databases, such as k/v stores, document or graph databases</li>
+<li>noSQL databases, such as k/v stores, document or graph
+databases</li>
 </ul></li>
 </ul></li>
 </ul>
@@ -402,11 +508,22 @@
 <li>external web services (database server, remote FS)</li>
 </ul>
 <h1 id="session-management">Session Management</h1>
-<p>Sessions provide state beyond individual HTTP requests. Example uses are multi-step forms, login status or shopping carts.</p>
-<p>This requires the server to identify subsequent requests belonging to the same user/session. A session is the list of consecutive actions of an individual user. This is usually implemented by labeling the requests, that label is called <em>Session ID</em> or <em>Session Token</em>. The ID is generated on the server side, and has to be unique and un-guessable (to prevent session hijacking). It is transmitted to the client in the first response, which then includes it in subsequent requests. This allows the server to relate it to the session.</p>
-<p>Sessions may end, either explicitly (discarding the session ID on server or client) or by timeout.</p>
+<p>Sessions provide state beyond individual HTTP requests. Example uses
+are multi-step forms, login status or shopping carts.</p>
+<p>This requires the server to identify subsequent requests belonging to
+the same user/session. A session is the list of consecutive actions of
+an individual user. This is usually implemented by labeling the
+requests, that label is called <em>Session ID</em> or <em>Session
+Token</em>. The ID is generated on the server side, and has to be unique
+and un-guessable (to prevent session hijacking). It is transmitted to
+the client in the first response, which then includes it in subsequent
+requests. This allows the server to relate it to the session.</p>
+<p>Sessions may end, either explicitly (discarding the session ID on
+server or client) or by timeout.</p>
 <h2 id="url-session-identifiers">URL Session Identifiers</h2>
-<p>Also called <em>URL rewriting</em>, this is a technique for handling session IDs. It works by embedding the ID in the URL, which requires the server to rewrite all hyperlinks in the response to include the ID.</p>
+<p>Also called <em>URL rewriting</em>, this is a technique for handling
+session IDs. It works by embedding the ID in the URL, which requires the
+server to rewrite all hyperlinks in the response to include the ID.</p>
 <p>Advantages:</p>
 <ul>
 <li>No client support needed</li>
@@ -415,40 +532,80 @@
 </ul>
 <p>Disadvantages:</p>
 <ul>
-<li>Security risk: Session ID easily exposed by sharing or logging an URL</li>
+<li>Security risk: Session ID easily exposed by sharing or logging an
+URL</li>
 <li>Correct rewriting might be difficult</li>
 </ul>
 <h2 id="cookies">Cookies</h2>
-<p>Cookies are small chunks of data (KV pairs) related to one domain, which the client includes for every request to the same domain. Cookies provide a more secure way to attach IDs to session.</p>
-<p>The server provides the cookies using <code>Set-Cookie</code> headers, which include the session ID.</p>
-<p>The client receives the cookie, saves it and sends it back to the server in subsequent requests using the <code>Cookie</code> header.</p>
+<p>Cookies are small chunks of data (KV pairs) related to one domain,
+which the client includes for every request to the same domain. Cookies
+provide a more secure way to attach IDs to session.</p>
+<p>The server provides the cookies using <code>Set-Cookie</code>
+headers, which include the session ID.</p>
+<p>The client receives the cookie, saves it and sends it back to the
+server in subsequent requests using the <code>Cookie</code> header.</p>
 <h2 id="session-state">Session State</h2>
-<p>Once the server has the possibility to relate requests to sessions, session state can be stored. This session state can be arbitrary, and would usually stored in a database indexed by the session ID.</p>
-<p>In principle, the entire state could be stored in a cookie, which eliminates the need for server-side storage but has several drawbacks such as limited size and the possibility for the client to modify the state in unexpected ways.</p>
+<p>Once the server has the possibility to relate requests to sessions,
+session state can be stored. This session state can be arbitrary, and
+would usually stored in a database indexed by the session ID.</p>
+<p>In principle, the entire state could be stored in a cookie, which
+eliminates the need for server-side storage but has several drawbacks
+such as limited size and the possibility for the client to modify the
+state in unexpected ways.</p>
 <h2 id="securtity">Securtity</h2>
-<p>There are multiple security considerations regarding sessions, in particular Leaking the ID, which can lead to session hijacking and thus impersonating the user</p>
+<p>There are multiple security considerations regarding sessions, in
+particular Leaking the ID, which can lead to session hijacking and thus
+impersonating the user</p>
 <h1 id="client-side-developments">Client-side Developments</h1>
-<p>The desire for more dynamic user interfaces in the web go beyond static HTML pages delivered from the server, and interactions consisting mainly of navigating to different pages. This requires computation on the client-side, which is possible using javascript. Today, the client-side of a web page consist of multiple elements of</p>
+<p>The desire for more dynamic user interfaces in the web go beyond
+static HTML pages delivered from the server, and interactions consisting
+mainly of navigating to different pages. This requires computation on
+the client-side, which is possible using javascript. Today, the
+client-side of a web page consist of multiple elements of</p>
 <ul>
 <li>HTML, defining the content and structure of the page</li>
 <li>CSS, providing styling and display information</li>
-<li>JavaScript, providing interaction and defining the dynamic behavior</li>
+<li>JavaScript, providing interaction and defining the dynamic
+behavior</li>
 </ul>
-<p>The JS execution model of a browser consists of an event loop processing callbacks. Inside the callbacks, the JS code has access to multiple APIs, such as for reading and modifying the DOM, setting timers or making (AJAX) requests.</p>
+<p>The JS execution model of a browser consists of an event loop
+processing callbacks. Inside the callbacks, the JS code has access to
+multiple APIs, such as for reading and modifying the DOM, setting timers
+or making (AJAX) requests.</p>
 <h1 id="object-relational-mapping">Object-Relational Mapping</h1>
-<p>Traditionally, relational DBs are accessed using SQL statements. Drawbacks to this are that SQL is both a different programming model to the application language and a different data model (relational vs e.g. variables, object oriented). This requires mapping between those two domains, and to synchronously maintain both models, the application code and database.</p>
-<p>An idea to solve this is to specify the model only in the application programming language. Data entities could be represented by language objects, relationships by references between objects. The mapping to the DB data model is automatic. Database queries/updates are hidden behind read/write of an object or its properties. Database inserts are hidden behind object creation. Executing queries instantiates language objects (queries themselves still exist).</p>
-<p>The database still requires a data model, and schema. This could however automatically be generated from the data model definition in the application language, and may even automatically synchronize changes in the data model.</p>
+<p>Traditionally, relational DBs are accessed using SQL statements.
+Drawbacks to this are that SQL is both a different programming model to
+the application language and a different data model (relational vs e.g.
+variables, object oriented). This requires mapping between those two
+domains, and to synchronously maintain both models, the application code
+and database.</p>
+<p>An idea to solve this is to specify the model only in the application
+programming language. Data entities could be represented by language
+objects, relationships by references between objects. The mapping to the
+DB data model is automatic. Database queries/updates are hidden behind
+read/write of an object or its properties. Database inserts are hidden
+behind object creation. Executing queries instantiates language objects
+(queries themselves still exist).</p>
+<p>The database still requires a data model, and schema. This could
+however automatically be generated from the data model definition in the
+application language, and may even automatically synchronize changes in
+the data model.</p>
 <h1 id="structured-developments">Structured Developments</h1>
-<p>All web developments covered up to this lecture required lots of boilerplate code, which is error prone and causes a high development overhead. This created a demand for a more structured development environment, which includes:</p>
+<p>All web developments covered up to this lecture required lots of
+boilerplate code, which is error prone and causes a high development
+overhead. This created a demand for a more structured development
+environment, which includes:</p>
 <ul>
 <li>Structure and best practices</li>
 <li>Common patterns for useful abstractions</li>
 <li>Automation of common tasks</li>
 </ul>
-<p>Those demands ultimately resulted in entire new frameworks for web development.</p>
+<p>Those demands ultimately resulted in entire new frameworks for web
+development.</p>
 <h2 id="mvc">MVC</h2>
-<p>Model-View-Controller is an architectural pattern applied to web-based services. It separates the application into three independent components:</p>
+<p>Model-View-Controller is an architectural pattern applied to
+web-based services. It separates the application into three independent
+components:</p>
 <ul>
 <li>Model
 <ul>
@@ -466,7 +623,9 @@
 <li>Controls views, such as activating a new view</li>
 </ul></li>
 </ul>
-<p>The business logic may be located in either the controller or model. If the logic is combined with the data in the model, operations would still be invoked by the controller.</p>
+<p>The business logic may be located in either the controller or model.
+If the logic is combined with the data in the model, operations would
+still be invoked by the controller.</p>
 <p>MVC can be applied to web applications in multiple ways:</p>
 <h4 id="server-side-mvc">Server Side MVC</h4>
 <ul>
@@ -474,43 +633,79 @@
 <li>Input request handled by controller</li>
 <li>Response generated by view</li>
 </ul>
-<p>Technologies such as Java Servlets assist in extracting the model, but controller and view would still be tightly coupled. Java Server Faces provides a generic, configurable controller component and allow separating the view (“Facelet”). The view can be implemented declaratively as an HTML page containing references to the model.</p>
-<p>Django takes a different approach: Django separates the tasks in the components view, model and template. The view handles the request and contains the business logic (like the controller in other examples). The template corresponds to the view in the java example: It is an HTML template which gets instantiated with model data by the view.</p>
+<p>Technologies such as Java Servlets assist in extracting the model,
+but controller and view would still be tightly coupled. Java Server
+Faces provides a generic, configurable controller component and allow
+separating the view (“Facelet”). The view can be implemented
+declaratively as an HTML page containing references to the model.</p>
+<p>Django takes a different approach: Django separates the tasks in the
+components view, model and template. The view handles the request and
+contains the business logic (like the controller in other examples). The
+template corresponds to the view in the java example: It is an HTML
+template which gets instantiated with model data by the view.</p>
 <h3 id="summary">Summary</h3>
 <ul>
-<li>MVC allows modularization, and separates design from programming</li>
-<li>Frameworks reduce required boilerplate code by providing common components</li>
+<li>MVC allows modularization, and separates design from
+programming</li>
+<li>Frameworks reduce required boilerplate code by providing common
+components</li>
 <li>Templating for views simplify development</li>
 <li>Modularization leads to improved testability</li>
 </ul>
-<h2 id="some-more-structural-patterns">Some more structural patterns</h2>
+<h2 id="some-more-structural-patterns">Some more structural
+patterns</h2>
 <h3 id="inversion-of-control-ioc">Inversion of Control (IoC)</h3>
-<p>This principle states that the application code is <em>reactive</em>, not active: it gets called by the framework when relevant events occur, instead of being the main entrypoint into the application.</p>
+<p>This principle states that the application code is <em>reactive</em>,
+not active: it gets called by the framework when relevant events occur,
+instead of being the main entrypoint into the application.</p>
 <h3 id="dont-repeat-yourself">Don’t Repeat Yourself</h3>
 <p>Self explanatory</p>
-<h3 id="convention-over-configuration">Convention Over Configuration</h3>
-<p>Code, configuration and other aspects such as directory structure should be derived from convention whenever possible.</p>
-<h3 id="structured-project-directories">Structured Project Directories</h3>
+<h3 id="convention-over-configuration">Convention Over
+Configuration</h3>
+<p>Code, configuration and other aspects such as directory structure
+should be derived from convention whenever possible.</p>
+<h3 id="structured-project-directories">Structured Project
+Directories</h3>
 <ul>
-<li>Frameworks usually have conventions, an it’s useful to adhere to them</li>
-<li>Frameworks sometimes provide generation of project scaffolding (Django, Ruby on Rails)</li>
+<li>Frameworks usually have conventions, an it’s useful to adhere to
+them</li>
+<li>Frameworks sometimes provide generation of project scaffolding
+(Django, Ruby on Rails)</li>
 </ul>
 <h1 id="ria-and-spa">RIA and SPA</h1>
 <h2 id="thin-vs.-thick-clients">Thin vs. Thick Clients</h2>
-<p>In thin-client applications, the browser only handles inputs and renders responses from the server. Interactions between client and server are HTTP requests.</p>
-<p>Thick-client applications move some business logic to the client side. This typically allows for improvements in user experience. Some actions are executed locally without server interaction. Other interactions with the server might be application specific, once the client application is loaded.</p>
-<h2 id="rich-internet-applications-ria">Rich Internet Applications (RIA)</h2>
-<p>Basic idea: Resemble user experience of local desktop application. This requires running some logic on the client side. An extreme example would be a client side game engine running in the browser. RIAs allow platform independence, which might be an advantage compared to native applications.</p>
+<p>In thin-client applications, the browser only handles inputs and
+renders responses from the server. Interactions between client and
+server are HTTP requests.</p>
+<p>Thick-client applications move some business logic to the client
+side. This typically allows for improvements in user experience. Some
+actions are executed locally without server interaction. Other
+interactions with the server might be application specific, once the
+client application is loaded.</p>
+<h2 id="rich-internet-applications-ria">Rich Internet Applications
+(RIA)</h2>
+<p>Basic idea: Resemble user experience of local desktop application.
+This requires running some logic on the client side. An extreme example
+would be a client side game engine running in the browser. RIAs allow
+platform independence, which might be an advantage compared to native
+applications.</p>
 <p>Examples of RIAs:</p>
 <ul>
 <li>Google Docs</li>
 <li>Web mail clients</li>
 <li>Flash games</li>
 </ul>
-<p>Frameworks are available for both client- and server-side programming.</p>
-<p>Today, RIA are “rich web applications”, using native web technologies such as HTML(5), CSS and JS.</p>
-<h2 id="single-page-applications-spa">Single Page Applications (SPA)</h2>
-<p>SPAs are thick clients, using current web technologies (HTML5, CSS3) and modern web APIs using JS. The page is loaded only once, and the application dynamically modifies the current page based on user input, instead of loading new pages. Interaction with the server is done in the background.</p>
+<p>Frameworks are available for both client- and server-side
+programming.</p>
+<p>Today, RIA are “rich web applications”, using native web technologies
+such as HTML(5), CSS and JS.</p>
+<h2 id="single-page-applications-spa">Single Page Applications
+(SPA)</h2>
+<p>SPAs are thick clients, using current web technologies (HTML5, CSS3)
+and modern web APIs using JS. The page is loaded only once, and the
+application dynamically modifies the current page based on user input,
+instead of loading new pages. Interaction with the server is done in the
+background.</p>
 <p>Technologies used:</p>
 <ul>
 <li>Communication
@@ -531,7 +726,8 @@
 <li>Handling of application state vs page location</li>
 <li>Partitioning of logic between client and server</li>
 </ul>
-<h1 id="node.js-and-unification-of-languages">Node.js and Unification of Languages</h1>
+<h1 id="node.js-and-unification-of-languages">Node.js and Unification of
+Languages</h1>
 <h2 id="emerging-challenges">Emerging Challenges</h2>
 <ul>
 <li>Scalability: C10k-like problems for dynamic content</li>
@@ -544,18 +740,25 @@
 <li>Isolation of individual requests at the server</li>
 <li>Application state exclusively in database</li>
 </ul>
-<p>while a modern application wants to use techniques such as long polling, wherein the server delays a response until some event has occurred (such as a new chat message being sent). This requires a new programming model with</p>
+<p>while a modern application wants to use techniques such as long
+polling, wherein the server delays a response until some event has
+occurred (such as a new chat message being sent). This requires a new
+programming model with</p>
 <ul>
 <li>Explicit concurrency support (inter-request interactions)</li>
 <li>Support for long-running and event-triggered requests</li>
 <li>Scalability for dynamic content generation</li>
 </ul>
-<h2 id="event-driven-web-application-runtime">Event-driven Web Application Runtime</h2>
-<p>This model extends the <a href="#reactor-pattern">reactor pattern</a> by allowing the event loop to execute arbitrary application code such as making database queries and generating HTML output.</p>
+<h2 id="event-driven-web-application-runtime">Event-driven Web
+Application Runtime</h2>
+<p>This model extends the <a href="#reactor-pattern">reactor pattern</a>
+by allowing the event loop to execute arbitrary application code such as
+making database queries and generating HTML output.</p>
 <h2 id="node.js">Node.js</h2>
 <ul>
 <li>Asynchronous, event-driven JS runtime</li>
-<li>JS is used because it does not have a threading model or standard IO functionality, as all those are provided exclusively by the runtime</li>
+<li>JS is used because it does not have a threading model or standard IO
+functionality, as all those are provided exclusively by the runtime</li>
 <li>Extensive use of callbacks</li>
 <li>Framework <code>express</code> simplifies HTTP server creation</li>
 <li>All callbacks executed sequentially</li>
@@ -563,13 +766,18 @@
 <li><code>npm</code> package manager and package registry</li>
 </ul>
 <h2 id="unification-of-languages">Unification of Languages</h2>
-<p>Using the same programming language for client and server has many advantages, such as easier debugging and less duplication of server and client code.</p>
-<p>A full JS stack has the advantage of not requiring transpilation or code generation for the client side. Also, developers might already be familiar with JS because of its prominence for frontend code.</p>
+<p>Using the same programming language for client and server has many
+advantages, such as easier debugging and less duplication of server and
+client code.</p>
+<p>A full JS stack has the advantage of not requiring transpilation or
+code generation for the client side. Also, developers might already be
+familiar with JS because of its prominence for frontend code.</p>
 <p>Popular JS stack “MEAN”: MongoDB, Express, AngularJS, Node.js.</p>
 <h1 id="component-based-frameworks">Component-based Frameworks</h1>
 <p>This focuses on web component for the client side.</p>
 <ul>
-<li>Components are reusable view elements, which is desirable to avoid re-implementing features</li>
+<li>Components are reusable view elements, which is desirable to avoid
+re-implementing features</li>
 <li>No standard way for re-using HTML blocks, templating</li>
 </ul>
 <h2 id="web-components-specification">Web Components Specification</h2>
@@ -586,21 +794,26 @@
 <li>Shadow DOM: Scoped DOM, encapsulating style + markup
 <ul>
 <li>hides implementation of components</li>
-<li>page styles not applied to shadow dom, shadow dom styles not applied on page level</li>
+<li>page styles not applied to shadow dom, shadow dom styles not applied
+on page level</li>
 </ul></li>
 <li>HTML Templates: Declare HTML fragments, instantiate at runtime
 <ul>
-<li><code>&lt;slot&gt;</code> allows injection of instance specific data</li>
+<li><code>&lt;slot&gt;</code> allows injection of instance specific
+data</li>
 </ul></li>
 <li>ES Modules: reuse of JS documents</li>
 </ul>
-<h2 id="component-based-application-frameworks">Component-based Application Frameworks</h2>
-<p>Those don’t use the standard components directly, but implement similar concepts.</p>
+<h2 id="component-based-application-frameworks">Component-based
+Application Frameworks</h2>
+<p>Those don’t use the standard components directly, but implement
+similar concepts.</p>
 <ul>
 <li>Angular
 <ul>
 <li>Declarative HTML templates</li>
-<li>Typescript for defining components, which references HTML and CSS</li>
+<li>Typescript for defining components, which references HTML and
+CSS</li>
 <li></li>
 </ul></li>
 <li>React
@@ -625,15 +838,22 @@
 <p>Principles of PWAs:</p>
 <ul>
 <li>discoverable: indexable by search engines</li>
-<li>installable: integrates with platform app-launcher/homescreen/whatever</li>
+<li>installable: integrates with platform
+app-launcher/homescreen/whatever</li>
 <li>linkable: sharing via URI</li>
-<li>network independent: PWA can work offline or with limited connectivity</li>
-<li>progressive: basic feature set for old browser, extended features for new browsers
+<li>network independent: PWA can work offline or with limited
+connectivity</li>
+<li>progressive: basic feature set for old browser, extended features
+for new browsers
 <ul>
-<li>graceful degradation: mitigation techniques for missing features</li>
-<li>shims, polyfills: re-implementation of modern web APIs for browsers without native support in plain JS</li>
-<li>progressive enhancements: opposite of graceful degradation: upgrade basic functionality if available</li>
-<li>transpilation of modern JS to version compatible with older browser version</li>
+<li>graceful degradation: mitigation techniques for missing
+features</li>
+<li>shims, polyfills: re-implementation of modern web APIs for browsers
+without native support in plain JS</li>
+<li>progressive enhancements: opposite of graceful degradation: upgrade
+basic functionality if available</li>
+<li>transpilation of modern JS to version compatible with older browser
+version</li>
 </ul></li>
 <li>re-engageable: can send notifications to users</li>
 <li>responsive: adapts to device and screen size</li>
@@ -643,7 +863,8 @@
 <ul>
 <li>secure contexts
 <ul>
-<li>browser allows access to sensitive APIs only if requirements fulfilled</li>
+<li>browser allows access to sensitive APIs only if requirements
+fulfilled</li>
 <li>requirements might be e.g. a secure connection</li>
 </ul></li>
 <li>web app manifests
@@ -672,7 +893,8 @@
 </ul></li>
 </ul>
 <h1 id="popular-implementations">Popular Implementations</h1>
-<p>This section has been skipped due to an unbearable amount of Java EE content.</p>
+<p>This section has been skipped due to an unbearable amount of Java EE
+content.</p>
 <h1 id="introduction-to-scalability">Introduction to Scalability</h1>
 <h2 id="part-1">Part 1</h2>
 <p>The main requirements for a large scale web application are</p>
@@ -681,8 +903,13 @@
 <li>scalability</li>
 <li>maintainability</li>
 </ul>
-<p>A scalable system is able to cope with varying load. This might require utilizing additional resources, or graceful degradation in case of temporary overload. Scalability is not the same as performance, as a system which has good performance for a single user it might still not scale well for large numbers of users.</p>
-<h3 id="client-side-performance-metrics">Client Side Performance Metrics</h3>
+<p>A scalable system is able to cope with varying load. This might
+require utilizing additional resources, or graceful degradation in case
+of temporary overload. Scalability is not the same as performance, as a
+system which has good performance for a single user it might still not
+scale well for large numbers of users.</p>
+<h3 id="client-side-performance-metrics">Client Side Performance
+Metrics</h3>
 <ul>
 <li>DNS lookup time</li>
 <li>Time to first byte TTFB</li>
@@ -690,7 +917,8 @@
 <li>Time to start render</li>
 <li>Time to interactive (TTI)</li>
 </ul>
-<h3 id="server-side-performance-metrics">Server Side Performance Metrics</h3>
+<h3 id="server-side-performance-metrics">Server Side Performance
+Metrics</h3>
 <ul>
 <li>request throughput (requests per second)</li>
 <li>response times (time between receiving request and responding)</li>
@@ -699,9 +927,15 @@
 <li>uptime</li>
 </ul>
 <h4 id="response-times">Response Times</h4>
-<p>Both average and peak response time can be measured.. However, those statistics are of limited relevance, since the distribution is usually not normal or uniform. A better way of assessing response times are percentiles (99% of all responses arrive within <span class="math inline">\(p_{99}\)</span>). Percentile plots (hockey stick plots) allow comparing response times of multiple systems.</p>
+<p>Both average and peak response time can be measured.. However, those
+statistics are of limited relevance, since the distribution is usually
+not normal or uniform. A better way of assessing response times are
+percentiles (99% of all responses arrive within <span
+class="math inline">\(p_{99}\)</span>). Percentile plots (hockey stick
+plots) allow comparing response times of multiple systems.</p>
 <h4 id="throughput-vs-response-time">Throughput vs Response Time</h4>
-<p>Under load, increased throughput negatively affects response times. This might be due to requests being queued for example.</p>
+<p>Under load, increased throughput negatively affects response times.
+This might be due to requests being queued for example.</p>
 <h2 id="part-2">Part 2</h2>
 <p>(TODO)</p>
 <h1 id="interactioncommunication">Interaction/Communication</h1>
