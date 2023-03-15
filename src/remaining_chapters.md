@@ -1,4 +1,3 @@
-# Interaction/Communication
 # State
 # Logic
 # Deployment/Infrastructure
