@@ -39,3 +39,8 @@ UDP
 Websockets
 cacheability
 redirections
+RPC
+RMI
+protobuf
+multicast
+WSDL

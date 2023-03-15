@@ -76,6 +76,7 @@ and bears the hidden cost of HTTP (headers, TLS handshakes, etc).
 
 The modern approach however is WebSocket:
 WebSocket describes both an API and protocol:
+
 * reliable client-server interaction
 * compatible with HTTP connections
 * TLS integrated
@@ -92,8 +93,42 @@ WebSocket packets have at least two bytes overhead and allow binary payloads.
 Application protocols are usually used on top of WebSocket, which can already be specified when initiating the connection.
 
 ## Backend-Backend Communication
+This type of communication occurs between servers which are part of the backend.
+An example might be communication between an application server and database server.
 
-(TODO)
+Previously mentioned protocols like REST and GraphQL might be used between servers, but there are additional options:
+
+### RPC: Remote Procedure Call
+* Resembles a function invocation that happens on a remote host
+* request-reply interaction
+* Extends REST, which only allows CRUD operations
+* requires marshaling (serialization) of parameters and result
+
+Popular implementations:
+
+* Java RMI: transparent method invocation between JVMs
+* gRPC: language agnostic, based on HTTP/2 and protobuf. Also able to handle streams of data.
+* SQL: known for DB access, usually embedded into database connectors
+
+### Web Services Communication
+* no standardized definition
+* not widely used?
+
+SOAP:
+
+* XML based message protocol
+* multi paradigm: request-reply, request only, multi-reply, multicast, etc ("message exchange patterns")
+* needs underlying protocol such as HTTP
+* defines application data encoding based on XML schema
+
+WSDL "Web Service Description Language":
+
+* XML format for describing web services, basic building blocks:
+  * types: specify messages (such as SOAP)
+  * interface: specify functionality
+  * binding: how to access service (protocols)
+  * service: where to access functionality
+* can be used for code generation
 
 ## Advanced Concepts
 
