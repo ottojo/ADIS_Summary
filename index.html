@@ -266,8 +266,11 @@ id="toc-client-backend-communication">Client-Backend Communication</a>
 <li><a href="#graphql" id="toc-graphql">GraphQL</a></li>
 <li><a href="#websockets" id="toc-websockets">Websockets</a></li>
 </ul></li>
-<li><a href="#part-2-1" id="toc-part-2-1">Part 2</a></li>
-<li><a href="#part-3" id="toc-part-3">Part 3</a></li>
+<li><a href="#backend-backend-communication"
+id="toc-backend-backend-communication">Backend-Backend
+Communication</a></li>
+<li><a href="#advanced-concepts" id="toc-advanced-concepts">Advanced
+Concepts</a></li>
 </ul></li>
 <li><a href="#state" id="toc-state">State</a></li>
 <li><a href="#logic" id="toc-logic">Logic</a></li>
@@ -1193,10 +1196,29 @@ more complex, since data is often incomplete, and queries can be very
 complex. This leads to large processing demands on the server, which
 also vary widely by request.</p>
 <h3 id="websockets">Websockets</h3>
+<p>HTTP is not suited for interactive two-way communication (prime
+example: web chat application). An option to solve this would be AJAX
+polling, or AJAX long polling, but this requires complex server-side
+coordination and bears the hidden cost of HTTP (headers, TLS handshakes,
+etc).</p>
+<p>The modern approach however is WebSocket: WebSocket describes both an
+API and protocol: * reliable client-server interaction * compatible with
+HTTP connections * TLS integrated * callback-based API suited for JS</p>
+<p>The client opens a WebSocket connection to the server, and can then
+send messages and react to incoming messages. The server listens to
+incoming requests to open connections, and then interacts with the
+connection.</p>
+<p>The WebSocket protocol is compatible with HTTP, and uses a GET
+request to initiate a connection. After the response, the protocol is
+switched to WebSocket. Subsequent messages are not HTTP requests, but
+use the WebSocket wire protocol. WebSocket packets have at least two
+bytes overhead and allow binary payloads.</p>
+<p>Application protocols are usually used on top of WebSocket, which can
+already be specified when initiating the connection.</p>
+<h2 id="backend-backend-communication">Backend-Backend
+Communication</h2>
 <p>(TODO)</p>
-<h2 id="part-2-1">Part 2</h2>
-<p>(TODO)</p>
-<h2 id="part-3">Part 3</h2>
+<h2 id="advanced-concepts">Advanced Concepts</h2>
 <p>(TODO)</p>
 <h1 id="state">State</h1>
 <h1 id="logic">Logic</h1>
