@@ -70,13 +70,31 @@ Caching is more complex, since data is often incomplete, and queries can be very
 This leads to large processing demands on the server, which also vary widely by request.
 
 ### Websockets
+HTTP is not suited for interactive two-way communication (prime example: web chat application).
+An option to solve this would be AJAX polling, or AJAX long polling, but this requires complex server-side coordination
+and bears the hidden cost of HTTP (headers, TLS handshakes, etc).
+
+The modern approach however is WebSocket:
+WebSocket describes both an API and protocol:
+* reliable client-server interaction
+* compatible with HTTP connections
+* TLS integrated
+* callback-based API suited for JS
+
+The client opens a WebSocket connection to the server, and can then send messages and react to incoming messages.
+The server listens to incoming requests to open connections, and then interacts with the connection.
+
+The WebSocket protocol is compatible with HTTP, and uses a GET request to initiate a connection.
+After the response, the protocol is switched to WebSocket.
+Subsequent messages are not HTTP requests, but use the WebSocket wire protocol.
+WebSocket packets have at least two bytes overhead and allow binary payloads.
+
+Application protocols are usually used on top of WebSocket, which can already be specified when initiating the connection.
+
+## Backend-Backend Communication
 
 (TODO)
 
-## Part 2
-
-(TODO)
-
-## Part 3
+## Advanced Concepts
 
 (TODO)
