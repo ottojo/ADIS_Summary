@@ -267,8 +267,13 @@ id="toc-client-backend-communication">Client-Backend Communication</a>
 <li><a href="#websockets" id="toc-websockets">Websockets</a></li>
 </ul></li>
 <li><a href="#backend-backend-communication"
-id="toc-backend-backend-communication">Backend-Backend
-Communication</a></li>
+id="toc-backend-backend-communication">Backend-Backend Communication</a>
+<ul>
+<li><a href="#rpc-remote-procedure-call"
+id="toc-rpc-remote-procedure-call">RPC: Remote Procedure Call</a></li>
+<li><a href="#web-services-communication"
+id="toc-web-services-communication">Web Services Communication</a></li>
+</ul></li>
 <li><a href="#advanced-concepts" id="toc-advanced-concepts">Advanced
 Concepts</a></li>
 </ul></li>
@@ -1202,8 +1207,13 @@ polling, or AJAX long polling, but this requires complex server-side
 coordination and bears the hidden cost of HTTP (headers, TLS handshakes,
 etc).</p>
 <p>The modern approach however is WebSocket: WebSocket describes both an
-API and protocol: * reliable client-server interaction * compatible with
-HTTP connections * TLS integrated * callback-based API suited for JS</p>
+API and protocol:</p>
+<ul>
+<li>reliable client-server interaction</li>
+<li>compatible with HTTP connections</li>
+<li>TLS integrated</li>
+<li>callback-based API suited for JS</li>
+</ul>
 <p>The client opens a WebSocket connection to the server, and can then
 send messages and react to incoming messages. The server listens to
 incoming requests to open connections, and then interacts with the
@@ -1217,7 +1227,50 @@ bytes overhead and allow binary payloads.</p>
 already be specified when initiating the connection.</p>
 <h2 id="backend-backend-communication">Backend-Backend
 Communication</h2>
-<p>(TODO)</p>
+<p>This type of communication occurs between servers which are part of
+the backend. An example might be communication between an application
+server and database server.</p>
+<p>Previously mentioned protocols like REST and GraphQL might be used
+between servers, but there are additional options:</p>
+<h3 id="rpc-remote-procedure-call">RPC: Remote Procedure Call</h3>
+<ul>
+<li>Resembles a function invocation that happens on a remote host</li>
+<li>request-reply interaction</li>
+<li>Extends REST, which only allows CRUD operations</li>
+<li>requires marshaling (serialization) of parameters and result</li>
+</ul>
+<p>Popular implementations:</p>
+<ul>
+<li>Java RMI: transparent method invocation between JVMs</li>
+<li>gRPC: language agnostic, based on HTTP/2 and protobuf. Also able to
+handle streams of data.</li>
+<li>SQL: known for DB access, usually embedded into database
+connectors</li>
+</ul>
+<h3 id="web-services-communication">Web Services Communication</h3>
+<ul>
+<li>no standardized definition</li>
+<li>not widely used?</li>
+</ul>
+<p>SOAP:</p>
+<ul>
+<li>XML based message protocol</li>
+<li>multi paradigm: request-reply, request only, multi-reply, multicast,
+etc (“message exchange patterns”)</li>
+<li>needs underlying protocol such as HTTP</li>
+<li>defines application data encoding based on XML schema</li>
+</ul>
+<p>WSDL “Web Service Description Language”:</p>
+<ul>
+<li>XML format for describing web services, basic building blocks:
+<ul>
+<li>types: specify messages (such as SOAP)</li>
+<li>interface: specify functionality</li>
+<li>binding: how to access service (protocols)</li>
+<li>service: where to access functionality</li>
+</ul></li>
+<li>can be used for code generation</li>
+</ul>
 <h2 id="advanced-concepts">Advanced Concepts</h2>
 <p>(TODO)</p>
 <h1 id="state">State</h1>
