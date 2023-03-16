@@ -285,7 +285,43 @@ Architecture</a></li>
 Pressure</a></li>
 </ul></li>
 </ul></li>
-<li><a href="#state" id="toc-state">State</a></li>
+<li><a href="#state" id="toc-state">State</a>
+<ul>
+<li><a href="#state-in-scalable-web-architectures"
+id="toc-state-in-scalable-web-architectures">State in Scalable Web
+Architectures</a></li>
+<li><a href="#caching" id="toc-caching">Caching</a></li>
+<li><a href="#data-models" id="toc-data-models">Data Models</a>
+<ul>
+<li><a href="#relational-model" id="toc-relational-model">Relational
+Model</a></li>
+<li><a href="#keyvalue" id="toc-keyvalue">Key/Value</a></li>
+<li><a href="#document-oriented" id="toc-document-oriented">Document
+oriented</a></li>
+<li><a href="#graph-model" id="toc-graph-model">Graph Model</a></li>
+<li><a href="#column-oriented-model"
+id="toc-column-oriented-model">Column-oriented Model</a></li>
+</ul></li>
+<li><a href="#functional-decomposition"
+id="toc-functional-decomposition">Functional Decomposition</a></li>
+<li><a href="#replication" id="toc-replication">Replication</a>
+<ul>
+<li><a href="#leader-follower-replication"
+id="toc-leader-follower-replication">Leader-Follower
+Replication</a></li>
+<li><a href="#multi-leader-replication"
+id="toc-multi-leader-replication">Multi-Leader Replication</a></li>
+<li><a href="#leaderless-replication"
+id="toc-leaderless-replication">Leaderless Replication</a></li>
+</ul></li>
+<li><a href="#sharding" id="toc-sharding">Sharding</a></li>
+<li><a href="#data-consistency" id="toc-data-consistency">Data
+Consistency</a></li>
+<li><a href="#distributed-databases"
+id="toc-distributed-databases">Distributed Databases</a></li>
+<li><a href="#event-sourcing" id="toc-event-sourcing">Event
+Sourcing</a></li>
+</ul></li>
 <li><a href="#logic" id="toc-logic">Logic</a></li>
 <li><a href="#deploymentinfrastructure"
 id="toc-deploymentinfrastructure">Deployment/Infrastructure</a></li>
@@ -1361,6 +1397,143 @@ systems</li>
 (graceful degradation)</li>
 </ul>
 <h1 id="state">State</h1>
+<h2 id="state-in-scalable-web-architectures">State in Scalable Web
+Architectures</h2>
+<p>In this section, we consider server-side state. We have to
+differentiate the context of the state: request, session, long-term.
+Additionally, we have to differentiate between ephemeral/volatile,
+derived and persistent state.</p>
+<h2 id="caching">Caching</h2>
+<p>Main idea: prevent duplicate work.</p>
+<p>Challenges:</p>
+<ul>
+<li>potential for inconsistent state</li>
+<li>cache could become bottleneck</li>
+<li>failing/restarting caches may overload downstream components</li>
+<li>increased system complexity</li>
+</ul>
+<p>Application of caching throughout the architecture:</p>
+<ul>
+<li>client side caching of responses</li>
+<li>outsourcing to CDNs</li>
+<li>reverse proxies with cache: serve static content and cached
+dynamically generated pages</li>
+<li>cache support on web servers: cache-control headers etc</li>
+<li>application servers: caching in language runtimes (bytecode for
+interpreted languages), caching of DB queries, application specific
+strategies</li>
+<li>database: various internal caching methods, caching of query
+results</li>
+<li>in-memory data stores: provides caching for other components</li>
+<li>backend services: caching of results</li>
+</ul>
+<p>Rule of thumb: cache high up in the call stack (close to the
+client).</p>
+<h2 id="data-models">Data Models</h2>
+<h3 id="relational-model">Relational Model</h3>
+<ul>
+<li>SQL for data definition, manipulation, querying</li>
+<li>transactions</li>
+</ul>
+<h3 id="keyvalue">Key/Value</h3>
+<ul>
+<li>hash table storage</li>
+<li>limited size key</li>
+<li>usually arbitrary value</li>
+</ul>
+<h3 id="document-oriented">Document oriented</h3>
+<ul>
+<li>similar to k/v, but structured document as value</li>
+<li>document usually JSON, XML, etc</li>
+</ul>
+<h3 id="graph-model">Graph Model</h3>
+<ul>
+<li>data items as vertices and edges</li>
+<li>interesting if querying relationships between items is common
+operation (social network, road network)</li>
+</ul>
+<h3 id="column-oriented-model">Column-oriented Model</h3>
+<ul>
+<li>storage of tables by column instead of rows</li>
+<li>more complex insert operation</li>
+<li>efficient operations over large table, such as aggregation</li>
+</ul>
+<h2 id="functional-decomposition">Functional Decomposition</h2>
+<p>Idea: Split application model into logical parts which can be
+separated.</p>
+<ul>
+<li>allows physical separation</li>
+<li>enables use of different data models</li>
+<li>join-logic must be handled by application</li>
+</ul>
+<h2 id="replication">Replication</h2>
+<p>Idea: Multiple copies of the same data.</p>
+<ul>
+<li>increases throughput</li>
+<li>increases availability (tolerate failure of a replica)</li>
+<li>reduces latency via geo-replication</li>
+</ul>
+<p>Primary challenge: mutable data. This requires propagation of updates
+to achieve consistency between replicas.</p>
+<h3 id="leader-follower-replication">Leader-Follower Replication</h3>
+<ul>
+<li>Dedicated leader database and set of replicas, called followers</li>
+<li>Only read-only applications sent to follower databases</li>
+<li>writes replicated from leader to follower</li>
+<li>replication might be done synchronously (within the write operation)
+or asynchronously</li>
+</ul>
+<p>Replication Mechanism:</p>
+<ul>
+<li>statement based: direct execution of statements in replicas.
+statements must be deterministic.</li>
+<li>log based: append-only log of changes sent to replicas. might be
+“write-ahead log” of more low-level write operations</li>
+<li>application triggered: replication triggered and specified by user
+application</li>
+</ul>
+<p>Properties/guarantees relating to consistency anomalies:</p>
+<ul>
+<li>read your own writes: guarantee of seeing previous write in
+subsequent read</li>
+<li>monotonic reads: guarantee that subsequent reads will never return a
+previous version of the state</li>
+<li>consistent prefix reads: data items observed in causally correct
+order</li>
+</ul>
+<h3 id="multi-leader-replication">Multi-Leader Replication</h3>
+<ul>
+<li>Multiple instances handle write operations</li>
+<li>might be generalized to client-server interaction (e.g. for
+PWAs)</li>
+</ul>
+<p>Main problem: write conflicts. Strategies for resolution:</p>
+<ul>
+<li>conflict avoidance: each data item has one authoritative leader
+which handles write operations</li>
+<li>convergence to consistent state: ensure all leaders agree after
+replication, such as by enforcing global order on update operations</li>
+<li>user-defined resolution: application specific</li>
+</ul>
+<h3 id="leaderless-replication">Leaderless Replication</h3>
+<ul>
+<li>always contact all instances, but only require certain number of
+responses (quorum)</li>
+<li>write quorum <span class="math inline">\(w &lt; n\)</span> for <span
+class="math inline">\(n\)</span> replicas: writes possible even if
+replica is down</li>
+<li>sum of write and read quorum <span
+class="math inline">\(w+r&gt;n\)</span>, such as <span
+class="math inline">\(w=r=\frac{n}{2}+1\)</span></li>
+<li>optimization: smaller <span class="math inline">\(r\)</span> for
+read-heavy loads</li>
+<li>if <span class="math inline">\(w+r \leq n\)</span>: increased risk
+of reading stale data</li>
+</ul>
+<h2 id="sharding">Sharding</h2>
+<h2 id="data-consistency">Data Consistency</h2>
+<h2 id="distributed-databases">Distributed Databases</h2>
+<h2 id="event-sourcing">Event Sourcing</h2>
 <h1 id="logic">Logic</h1>
 <h1 id="deploymentinfrastructure">Deployment/Infrastructure</h1>
 <h1 id="security-and-privacy">Security and Privacy</h1>
