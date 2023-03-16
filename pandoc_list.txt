@@ -14,5 +14,6 @@ src/m-progressive_web_applications.md
 src/n-popular_implementations.md
 src/o-introduction_to_scalability.md
 src/p-interaction_communication.md
+src/q-state.md
 src/remaining_chapters.md
 metadata.yaml
