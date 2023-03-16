@@ -52,3 +52,6 @@ runtimes
 geo-replication
 frac
 leq
+rebalancing
+keyspace
+PACELC

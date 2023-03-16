@@ -101,7 +101,57 @@ Main problem: write conflicts. Strategies for resolution:
 * optimization: smaller $r$ for read-heavy loads
 * if $w+r \leq n$: increased risk of reading stale data
 
-## Sharding
+## Sharding/Partitioning
+* Split a collection of data item into multiple partitions
+* requires routing of requests to correct partition
+* primary challenge: partitioning scheme which creates even distribution and allows rebalancing
+
+Partitioning schemes:
+
+* key range: shard = ranged partition of key space
+  * straightforward
+  * prone to skewed workloads
+* hashed keys
+  * no inherent support of range queries
+
+Rebalancing shards: scale-out by adding instances, ideally with low migration effort
+
+* dynamic partitioning (key based sharding): split keyspace of overloaded shard in two halves, assign one half to new shard
+* fixed number of shards which is way larger than number of machines: new machine can take some existing shards
+* fixed number of shards per machine: new machine picks some shards, splits them and hosts one half
+
+Sharding is often combined with replication.
+
 ## Data Consistency
-## Distributed Databases
+Consistency models define visibility semantics and system behavior.
+
+### CAP Theorem
+In case of a partition, a system can either
+
+* focus on consistency, but loose availability, or:
+* keep instance available, but not guarantee consistency
+
+### PACELC Theorem
+* In case of a network partition, you have to choose between availability and consistency.
+* Else, in normal operation, you have to choose between latency and consistency.
+
+### Harvest/Yield
+* harvest: completeness of queries
+* yield: probability of completing a request
+* in some cases, an incomplete result is better than no result
+
 ## Event Sourcing
+* alternative style for persisting data
+* append-only sequence of (immutable) state-changes
+* state computed by applying all state-changes in order
+* event log is persisted, for example on append-only k/v store
+
+Benefits:
+
+* Persistence of state history
+* explicit consistency model
+
+Drawbacks:
+
+* unconventional
+* increased storage requirements
