@@ -131,5 +131,61 @@ WSDL "Web Service Description Language":
 * can be used for code generation
 
 ## Advanced Concepts
+### Messaging
+* Interconnect servers by message bus
 
-(TODO)
+#### Queuing
+* messages addressed to queues
+* queues resemble mailboxes
+* receiver asynchronously fetches messages from queue
+* queue decouples sender and receiver
+
+#### Pub-Sub
+* messages not specifically addressed
+* receivers subscribe to desired messages
+* could be topic based or content based
+* implementation could be one queue per topic
+
+#### Implementation Notes
+* library approach: queue is integrated into receiver application
+* server approach: queue located on dedicated message server
+  * replication of server allows scaling
+
+Examples:
+
+* IBM MQ
+  * combines queuing and pubsub
+* Apache Kafka
+  * persistent message stored
+  * topic-based pubsub
+  * allows stream processing
+  * scalability:
+    * partitioning of topic queues
+    * receivers organized in consumer groups, which subscribe to topics. Consumer group could have one receiver per partition of topic queue.
+
+### SEDA: Staged Event-Driven Architecture
+* motivation: efficient internet services even for load spikes
+* idea: pipelining
+* stage input: event queue
+* stage outputs: events for subsequent stages
+
+Advantages:
+
+* independent processing units
+* decoupled stages
+* parallelization of stages
+
+Disadvantages:
+
+* queues can become bottlenecks
+* complex architecture
+* nowadays: no performance improvement compared to (modern) threading systems
+
+### Back Pressure
+* concept for preventing exhaustion of service resources
+* idea: block resource consumption until resources are available
+* examples:
+  * block additional connections
+  * block producers from submitting new messages
+  * block callers from invoking procedures
+* might lead to pipeline stalls, but prevents system from crashing (graceful degradation)

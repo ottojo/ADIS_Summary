@@ -44,3 +44,6 @@ RMI
 protobuf
 multicast
 WSDL
+MQ
+pubsub
+SEDA
