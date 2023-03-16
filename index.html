@@ -314,11 +314,16 @@ id="toc-multi-leader-replication">Multi-Leader Replication</a></li>
 <li><a href="#leaderless-replication"
 id="toc-leaderless-replication">Leaderless Replication</a></li>
 </ul></li>
-<li><a href="#sharding" id="toc-sharding">Sharding</a></li>
+<li><a href="#shardingpartitioning"
+id="toc-shardingpartitioning">Sharding/Partitioning</a></li>
 <li><a href="#data-consistency" id="toc-data-consistency">Data
-Consistency</a></li>
-<li><a href="#distributed-databases"
-id="toc-distributed-databases">Distributed Databases</a></li>
+Consistency</a>
+<ul>
+<li><a href="#cap-theorem" id="toc-cap-theorem">CAP Theorem</a></li>
+<li><a href="#pacelc-theorem" id="toc-pacelc-theorem">PACELC
+Theorem</a></li>
+<li><a href="#harvestyield" id="toc-harvestyield">Harvest/Yield</a></li>
+</ul></li>
 <li><a href="#event-sourcing" id="toc-event-sourcing">Event
 Sourcing</a></li>
 </ul></li>
@@ -1530,10 +1535,75 @@ read-heavy loads</li>
 <li>if <span class="math inline">\(w+r \leq n\)</span>: increased risk
 of reading stale data</li>
 </ul>
-<h2 id="sharding">Sharding</h2>
+<h2 id="shardingpartitioning">Sharding/Partitioning</h2>
+<ul>
+<li>Split a collection of data item into multiple partitions</li>
+<li>requires routing of requests to correct partition</li>
+<li>primary challenge: partitioning scheme which creates even
+distribution and allows rebalancing</li>
+</ul>
+<p>Partitioning schemes:</p>
+<ul>
+<li>key range: shard = ranged partition of key space
+<ul>
+<li>straightforward</li>
+<li>prone to skewed workloads</li>
+</ul></li>
+<li>hashed keys
+<ul>
+<li>no inherent support of range queries</li>
+</ul></li>
+</ul>
+<p>Rebalancing shards: scale-out by adding instances, ideally with low
+migration effort</p>
+<ul>
+<li>dynamic partitioning (key based sharding): split keyspace of
+overloaded shard in two halves, assign one half to new shard</li>
+<li>fixed number of shards which is way larger than number of machines:
+new machine can take some existing shards</li>
+<li>fixed number of shards per machine: new machine picks some shards,
+splits them and hosts one half</li>
+</ul>
+<p>Sharding is often combined with replication.</p>
 <h2 id="data-consistency">Data Consistency</h2>
-<h2 id="distributed-databases">Distributed Databases</h2>
+<p>Consistency models define visibility semantics and system
+behavior.</p>
+<h3 id="cap-theorem">CAP Theorem</h3>
+<p>In case of a partition, a system can either</p>
+<ul>
+<li>focus on consistency, but loose availability, or:</li>
+<li>keep instance available, but not guarantee consistency</li>
+</ul>
+<h3 id="pacelc-theorem">PACELC Theorem</h3>
+<ul>
+<li>In case of a network partition, you have to choose between
+availability and consistency.</li>
+<li>Else, in normal operation, you have to choose between latency and
+consistency.</li>
+</ul>
+<h3 id="harvestyield">Harvest/Yield</h3>
+<ul>
+<li>harvest: completeness of queries</li>
+<li>yield: probability of completing a request</li>
+<li>in some cases, an incomplete result is better than no result</li>
+</ul>
 <h2 id="event-sourcing">Event Sourcing</h2>
+<ul>
+<li>alternative style for persisting data</li>
+<li>append-only sequence of (immutable) state-changes</li>
+<li>state computed by applying all state-changes in order</li>
+<li>event log is persisted, for example on append-only k/v store</li>
+</ul>
+<p>Benefits:</p>
+<ul>
+<li>Persistence of state history</li>
+<li>explicit consistency model</li>
+</ul>
+<p>Drawbacks:</p>
+<ul>
+<li>unconventional</li>
+<li>increased storage requirements</li>
+</ul>
 <h1 id="logic">Logic</h1>
 <h1 id="deploymentinfrastructure">Deployment/Infrastructure</h1>
 <h1 id="security-and-privacy">Security and Privacy</h1>
