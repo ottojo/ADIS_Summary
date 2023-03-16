@@ -275,7 +275,15 @@ id="toc-rpc-remote-procedure-call">RPC: Remote Procedure Call</a></li>
 id="toc-web-services-communication">Web Services Communication</a></li>
 </ul></li>
 <li><a href="#advanced-concepts" id="toc-advanced-concepts">Advanced
-Concepts</a></li>
+Concepts</a>
+<ul>
+<li><a href="#messaging" id="toc-messaging">Messaging</a></li>
+<li><a href="#seda-staged-event-driven-architecture"
+id="toc-seda-staged-event-driven-architecture">SEDA: Staged Event-Driven
+Architecture</a></li>
+<li><a href="#back-pressure" id="toc-back-pressure">Back
+Pressure</a></li>
+</ul></li>
 </ul></li>
 <li><a href="#state" id="toc-state">State</a></li>
 <li><a href="#logic" id="toc-logic">Logic</a></li>
@@ -1272,7 +1280,86 @@ etc (“message exchange patterns”)</li>
 <li>can be used for code generation</li>
 </ul>
 <h2 id="advanced-concepts">Advanced Concepts</h2>
-<p>(TODO)</p>
+<h3 id="messaging">Messaging</h3>
+<ul>
+<li>Interconnect servers by message bus</li>
+</ul>
+<h4 id="queuing">Queuing</h4>
+<ul>
+<li>messages addressed to queues</li>
+<li>queues resemble mailboxes</li>
+<li>receiver asynchronously fetches messages from queue</li>
+<li>queue decouples sender and receiver</li>
+</ul>
+<h4 id="pub-sub">Pub-Sub</h4>
+<ul>
+<li>messages not specifically addressed</li>
+<li>receivers subscribe to desired messages</li>
+<li>could be topic based or content based</li>
+<li>implementation could be one queue per topic</li>
+</ul>
+<h4 id="implementation-notes">Implementation Notes</h4>
+<ul>
+<li>library approach: queue is integrated into receiver application</li>
+<li>server approach: queue located on dedicated message server
+<ul>
+<li>replication of server allows scaling</li>
+</ul></li>
+</ul>
+<p>Examples:</p>
+<ul>
+<li>IBM MQ
+<ul>
+<li>combines queuing and pubsub</li>
+</ul></li>
+<li>Apache Kafka
+<ul>
+<li>persistent message stored</li>
+<li>topic-based pubsub</li>
+<li>allows stream processing</li>
+<li>scalability:
+<ul>
+<li>partitioning of topic queues</li>
+<li>receivers organized in consumer groups, which subscribe to topics.
+Consumer group could have one receiver per partition of topic
+queue.</li>
+</ul></li>
+</ul></li>
+</ul>
+<h3 id="seda-staged-event-driven-architecture">SEDA: Staged Event-Driven
+Architecture</h3>
+<ul>
+<li>motivation: efficient internet services even for load spikes</li>
+<li>idea: pipelining</li>
+<li>stage input: event queue</li>
+<li>stage outputs: events for subsequent stages</li>
+</ul>
+<p>Advantages:</p>
+<ul>
+<li>independent processing units</li>
+<li>decoupled stages</li>
+<li>parallelization of stages</li>
+</ul>
+<p>Disadvantages:</p>
+<ul>
+<li>queues can become bottlenecks</li>
+<li>complex architecture</li>
+<li>nowadays: no performance improvement compared to (modern) threading
+systems</li>
+</ul>
+<h3 id="back-pressure">Back Pressure</h3>
+<ul>
+<li>concept for preventing exhaustion of service resources</li>
+<li>idea: block resource consumption until resources are available</li>
+<li>examples:
+<ul>
+<li>block additional connections</li>
+<li>block producers from submitting new messages</li>
+<li>block callers from invoking procedures</li>
+</ul></li>
+<li>might lead to pipeline stalls, but prevents system from crashing
+(graceful degradation)</li>
+</ul>
 <h1 id="state">State</h1>
 <h1 id="logic">Logic</h1>
 <h1 id="deploymentinfrastructure">Deployment/Infrastructure</h1>
