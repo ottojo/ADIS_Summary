@@ -81,16 +81,28 @@ Deployment Models:
 * network
   * bridges/routers
 * storage
+  * disk-level (block storage)
+  * file-level (e.g. S3) (i think this should be "object storage"?)
 * containers
 
-(Part 2 25:00)
-
 #### Platform as a Service PaaS
-Application runtime such as FCGI runtime environment or servlet container
+* examples of platforms:
+  * servlet container
+  * FastCGI
+* abstracts away everything below application level
+* typically includes adjacent services
+
+Storage:
+
+* platforms for storage services
+* mostly database-like, such as SQL database as a service
+* caching services (in-memory)
 
 #### Software as a Service SaaS
-Applications
+* maintained application and hardware
+* e.g. google docs
 
 ### Virtualization
+* cloud: typically hypervisor based virtualization
 
 ## Advanced Topics
