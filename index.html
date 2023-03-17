@@ -361,7 +361,21 @@ Processing</a></li>
 id="toc-event-sourcing-and-cqrs">Event Sourcing and CQRS</a></li>
 </ul></li>
 <li><a href="#deploymentinfrastructure"
-id="toc-deploymentinfrastructure">Deployment/Infrastructure</a></li>
+id="toc-deploymentinfrastructure">Deployment/Infrastructure</a>
+<ul>
+<li><a href="#backend-endpoints" id="toc-backend-endpoints">Backend
+Endpoints</a>
+<ul>
+<li><a href="#proxies" id="toc-proxies">Proxies</a></li>
+<li><a href="#load-balancing" id="toc-load-balancing">Load
+Balancing</a></li>
+<li><a href="#cdns" id="toc-cdns">CDNs</a></li>
+</ul></li>
+<li><a href="#cloud-computing" id="toc-cloud-computing">Cloud
+Computing</a></li>
+<li><a href="#advanced-topics" id="toc-advanced-topics">Advanced
+Topics</a></li>
+</ul></li>
 <li><a href="#security-and-privacy"
 id="toc-security-and-privacy">Security and Privacy</a></li>
 <li><a href="#devops" id="toc-devops">DevOps</a></li>
@@ -1762,6 +1776,62 @@ strategies</li>
 </ul></li>
 </ul>
 <h1 id="deploymentinfrastructure">Deployment/Infrastructure</h1>
+<h2 id="backend-endpoints">Backend Endpoints</h2>
+<h3 id="proxies">Proxies</h3>
+<ul>
+<li>endpoint for HTTP requests</li>
+<li>main task: forwarding to server, usually also caching</li>
+<li>location: near the client</li>
+<li>purpose:
+<ul>
+<li>scalability</li>
+<li>filtering</li>
+<li>source obfuscation</li>
+</ul></li>
+</ul>
+<h4 id="reverse-proxies">Reverse Proxies:</h4>
+<ul>
+<li>location: near the server</li>
+<li>purpose:
+<ul>
+<li>hides backend structure</li>
+<li>filtering, caching, compression</li>
+<li>security: TLS endpoint, maybe even authentication</li>
+<li>load balancing</li>
+<li>logging</li>
+</ul></li>
+</ul>
+<p>Popular software:</p>
+<ul>
+<li>apache</li>
+<li>nginx</li>
+<li>HAProxy</li>
+</ul>
+<h3 id="load-balancing">Load Balancing</h3>
+<ul>
+<li>goal: scalabiltiy</li>
+<li>distribute incoming requests among multiple servers</li>
+</ul>
+<p>Two design dimensions: * Request routing * naming: Resolve same DNS
+name to multiple IP addresses, usually in a round-robin strategy. This
+resolves the DNS resolution equally, but this might not balance the load
+equally. It would also be feasable here to distribute based on source
+IP. * Application: A reverse proxy distributes HTTP requests. Here, a
+load based distribution strategy might be possible, if the proxy has
+access to load parameters of servers. Session stickiness ensures that
+all the requests of a single session reach the same backend server. This
+simplifies session state handling. * Transport: Reverse proxy
+distributes TCP connections. This has the advantage of being protocol
+agnostic. * distribution strategies * round robin * load based * session
+based * source based</p>
+<h3 id="cdns">CDNs</h3>
+<ul>
+<li>3rd party provider</li>
+<li>CDN handles (global) replication</li>
+<li>client direclty routed to CDN servers</li>
+</ul>
+<h2 id="cloud-computing">Cloud Computing</h2>
+<h2 id="advanced-topics">Advanced Topics</h2>
 <h1 id="security-and-privacy">Security and Privacy</h1>
 <h1 id="devops">DevOps</h1>
 </body>
