@@ -11,7 +11,7 @@
   * this might require additional coordination or dependency management
 
 ## Stateless and Stateful Application Logic
-* stateless: independent request-response cycles, desireable for scalability
+* stateless: independent request-response cycles, desirable for scalability
 * specific meaning of state:
   * session state
   * server-side application state ("stateful resources")
@@ -28,7 +28,7 @@ Examples:
   * database maintains stateful resources: mutable data
   * scalability: replication of application servers, scaling of DB (see above)
 
-Stateless logic is prefered whenever possible.
+Stateless logic is preferred whenever possible.
 It might be possible to decompose application logic into stateless and stateful parts.
 
 ## Distributing Application Logic
@@ -45,26 +45,26 @@ It might be possible to decompose application logic into stateless and stateful 
 
 ### Data Partitioning (Sharding)
 * Designate instance to handle designated set of requests
-* Partitioning based on e.g. user id, session id, client ip, etc
+* Partitioning based on e.g. user id, session id, client IP, etc
 * allows stateful request handling logic
 * load balancing needs to be aware of sharding
 
 ### Shared and Global State
 * state often handled by database system
-* transactional semantics challending for distributed databases
+* transactional semantics challenging for distributed databases
 * querying state from DB might not be fast enough
 
 Alternatives:
 
 * state bound to individual shard: concurrency only within single application server
-* distributed state between application instances: requires distriuted concurrency mechanism
+* distributed state between application instances: requires distributed concurrency mechanism
   * actor model
   * event-driven model (shared event bus, pubsub)
   * distributed transactions
 
 ## Background Tasks
 * request independent application logic
-  * maintanance tasks
+  * maintenance tasks
   * data analysis tasks
 * might be long running compared to requests
 * often requires access to backend and application state

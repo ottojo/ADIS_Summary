@@ -25,7 +25,7 @@ Popular software:
 * HAProxy
 
 ### Load Balancing
-* goal: scalabiltiy
+* goal: scalability
 * distribute incoming requests among multiple servers
 
 Two design dimensions:
@@ -34,7 +34,7 @@ Two design dimensions:
   * naming:
     Resolve same DNS name to multiple IP addresses, usually in a round-robin strategy.
     This resolves the DNS resolution equally, but this might not balance the load equally.
-    It would also be feasable here to distribute based on source IP.
+    It would also be feasible here to distribute based on source IP.
   * Application:
     A reverse proxy distributes HTTP requests.
     Here, a load based distribution strategy might be possible, if the proxy has access to load parameters of servers.
@@ -52,7 +52,7 @@ Two design dimensions:
 ### CDNs
 * 3rd party provider
 * CDN handles (global) replication
-* client direclty routed to CDN servers
+* client directly routed to CDN servers
 
 ## Cloud Computing
 Model for enabling on demand access to shared pool of computing resources,
@@ -69,7 +69,7 @@ Characteristics of cloud services:
 Deployment Models:
 
 * private cloud
-* comunity cloud
+* community cloud
 * public cloud
 * (hybrid models)
 
@@ -86,7 +86,7 @@ Deployment Models:
 (Part 2 25:00)
 
 #### Platform as a Service PaaS
-Application runtime such as FCGI runtime env or servlet container
+Application runtime such as FCGI runtime environment or servlet container
 
 #### Software as a Service SaaS
 Applications
