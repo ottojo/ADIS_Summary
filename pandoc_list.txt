@@ -16,5 +16,6 @@ src/o-introduction_to_scalability.md
 src/p-interaction_communication.md
 src/q-state.md
 src/r-logic.md
+src/s-deployment_infrastructure.md
 src/remaining_chapters.md
 metadata.yaml
