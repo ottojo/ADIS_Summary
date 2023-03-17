@@ -372,7 +372,13 @@ Balancing</a></li>
 <li><a href="#cdns" id="toc-cdns">CDNs</a></li>
 </ul></li>
 <li><a href="#cloud-computing" id="toc-cloud-computing">Cloud
-Computing</a></li>
+Computing</a>
+<ul>
+<li><a href="#service-models" id="toc-service-models">Service
+Models</a></li>
+<li><a href="#virtualization"
+id="toc-virtualization">Virtualization</a></li>
+</ul></li>
 <li><a href="#advanced-topics" id="toc-advanced-topics">Advanced
 Topics</a></li>
 </ul></li>
@@ -1812,18 +1818,30 @@ strategies</li>
 <li>goal: scalabiltiy</li>
 <li>distribute incoming requests among multiple servers</li>
 </ul>
-<p>Two design dimensions: * Request routing * naming: Resolve same DNS
-name to multiple IP addresses, usually in a round-robin strategy. This
-resolves the DNS resolution equally, but this might not balance the load
-equally. It would also be feasable here to distribute based on source
-IP. * Application: A reverse proxy distributes HTTP requests. Here, a
-load based distribution strategy might be possible, if the proxy has
-access to load parameters of servers. Session stickiness ensures that
-all the requests of a single session reach the same backend server. This
-simplifies session state handling. * Transport: Reverse proxy
-distributes TCP connections. This has the advantage of being protocol
-agnostic. * distribution strategies * round robin * load based * session
-based * source based</p>
+<p>Two design dimensions:</p>
+<ul>
+<li>Request routing
+<ul>
+<li>naming: Resolve same DNS name to multiple IP addresses, usually in a
+round-robin strategy. This resolves the DNS resolution equally, but this
+might not balance the load equally. It would also be feasable here to
+distribute based on source IP.</li>
+<li>Application: A reverse proxy distributes HTTP requests. Here, a load
+based distribution strategy might be possible, if the proxy has access
+to load parameters of servers. Session stickiness ensures that all the
+requests of a single session reach the same backend server. This
+simplifies session state handling.</li>
+<li>Transport: Reverse proxy distributes TCP connections. This has the
+advantage of being protocol agnostic.</li>
+</ul></li>
+<li>distribution strategies
+<ul>
+<li>round robin</li>
+<li>load based</li>
+<li>session based</li>
+<li>source based</li>
+</ul></li>
+</ul>
 <h3 id="cdns">CDNs</h3>
 <ul>
 <li>3rd party provider</li>
@@ -1831,6 +1849,46 @@ based * source based</p>
 <li>client direclty routed to CDN servers</li>
 </ul>
 <h2 id="cloud-computing">Cloud Computing</h2>
+<p>Model for enabling on demand access to shared pool of computing
+resources, which can be rapidly provisioned with minimal effort and
+interaction.</p>
+<p>Characteristics of cloud services:</p>
+<ul>
+<li>on-demand self service</li>
+<li>network access via standard interfaces</li>
+<li>resource pooling (multiplexing, virtualization)</li>
+<li>elasticity: fast adaptation and scaling</li>
+<li>measured service: pay as you go</li>
+</ul>
+<p>Deployment Models:</p>
+<ul>
+<li>private cloud</li>
+<li>comunity cloud</li>
+<li>public cloud</li>
+<li>(hybrid models)</li>
+</ul>
+<h3 id="service-models">Service Models</h3>
+<h4 id="infrastructure-as-a-service-iaas">Infrastructure as a Service
+IaaS</h4>
+<ul>
+<li>computing instance
+<ul>
+<li>physical or virtual (typically VM)</li>
+<li>initialized using image</li>
+</ul></li>
+<li>network
+<ul>
+<li>bridges/routers</li>
+</ul></li>
+<li>storage</li>
+<li>containers</li>
+</ul>
+<p>(Part 2 25:00)</p>
+<h4 id="platform-as-a-service-paas">Platform as a Service PaaS</h4>
+<p>Application runtime such as FCGI runtime env or servlet container</p>
+<h4 id="software-as-a-service-saas">Software as a Service SaaS</h4>
+<p>Applications</p>
+<h3 id="virtualization">Virtualization</h3>
 <h2 id="advanced-topics">Advanced Topics</h2>
 <h1 id="security-and-privacy">Security and Privacy</h1>
 <h1 id="devops">DevOps</h1>
