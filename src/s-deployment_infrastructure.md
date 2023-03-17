@@ -29,6 +29,7 @@ Popular software:
 * distribute incoming requests among multiple servers
 
 Two design dimensions:
+
 * Request routing
   * naming:
     Resolve same DNS name to multiple IP addresses, usually in a round-robin strategy.
@@ -54,4 +55,42 @@ Two design dimensions:
 * client direclty routed to CDN servers
 
 ## Cloud Computing
+Model for enabling on demand access to shared pool of computing resources,
+which can be rapidly provisioned with minimal effort and interaction.
+
+Characteristics of cloud services:
+
+* on-demand self service
+* network access via standard interfaces
+* resource pooling (multiplexing, virtualization)
+* elasticity: fast adaptation and scaling
+* measured service: pay as you go
+
+Deployment Models:
+
+* private cloud
+* comunity cloud
+* public cloud
+* (hybrid models)
+
+### Service Models
+#### Infrastructure as a Service IaaS
+* computing instance
+  * physical or virtual (typically VM)
+  * initialized using image
+* network
+  * bridges/routers
+* storage
+* containers
+
+(Part 2 25:00)
+
+#### Platform as a Service PaaS
+Application runtime such as FCGI runtime env or servlet container
+
+#### Software as a Service SaaS
+Applications
+
+### Virtualization
+
 ## Advanced Topics
