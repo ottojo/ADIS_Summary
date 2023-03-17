@@ -1880,16 +1880,38 @@ IaaS</h4>
 <ul>
 <li>bridges/routers</li>
 </ul></li>
-<li>storage</li>
+<li>storage
+<ul>
+<li>disk-level (block storage)</li>
+<li>file-level (e.g. S3) (i think this should be “object storage”?)</li>
+</ul></li>
 <li>containers</li>
 </ul>
-<p>(Part 2 25:00)</p>
 <h4 id="platform-as-a-service-paas">Platform as a Service PaaS</h4>
-<p>Application runtime such as FCGI runtime environment or servlet
-container</p>
+<ul>
+<li>examples of platforms:
+<ul>
+<li>servlet container</li>
+<li>FastCGI</li>
+</ul></li>
+<li>abstracts away everything below application level</li>
+<li>typically includes adjacent services</li>
+</ul>
+<p>Storage:</p>
+<ul>
+<li>platforms for storage services</li>
+<li>mostly database-like, such as SQL database as a service</li>
+<li>caching services (in-memory)</li>
+</ul>
 <h4 id="software-as-a-service-saas">Software as a Service SaaS</h4>
-<p>Applications</p>
+<ul>
+<li>maintained application and hardware</li>
+<li>e.g. google docs</li>
+</ul>
 <h3 id="virtualization">Virtualization</h3>
+<ul>
+<li>cloud: typically hypervisor based virtualization</li>
+</ul>
 <h2 id="advanced-topics">Advanced Topics</h2>
 <h1 id="security-and-privacy">Security and Privacy</h1>
 <h1 id="devops">DevOps</h1>
