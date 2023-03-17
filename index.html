@@ -327,7 +327,39 @@ Theorem</a></li>
 <li><a href="#event-sourcing" id="toc-event-sourcing">Event
 Sourcing</a></li>
 </ul></li>
-<li><a href="#logic" id="toc-logic">Logic</a></li>
+<li><a href="#logic" id="toc-logic">Logic</a>
+<ul>
+<li><a href="#application-logic" id="toc-application-logic">Application
+Logic</a></li>
+<li><a href="#stateless-and-stateful-application-logic"
+id="toc-stateless-and-stateful-application-logic">Stateless and Stateful
+Application Logic</a></li>
+<li><a href="#distributing-application-logic"
+id="toc-distributing-application-logic">Distributing Application
+Logic</a>
+<ul>
+<li><a href="#functional-partitioning"
+id="toc-functional-partitioning">Functional Partitioning</a></li>
+<li><a href="#horizontal-duplication-replication"
+id="toc-horizontal-duplication-replication">Horizontal Duplication
+(Replication)</a></li>
+<li><a href="#data-partitioning-sharding"
+id="toc-data-partitioning-sharding">Data Partitioning
+(Sharding)</a></li>
+<li><a href="#shared-and-global-state"
+id="toc-shared-and-global-state">Shared and Global State</a></li>
+</ul></li>
+<li><a href="#background-tasks" id="toc-background-tasks">Background
+Tasks</a>
+<ul>
+<li><a href="#batch-processing" id="toc-batch-processing">Batch
+Processing</a></li>
+<li><a href="#stream-processing" id="toc-stream-processing">Stream
+Processing</a></li>
+</ul></li>
+<li><a href="#event-sourcing-and-cqrs"
+id="toc-event-sourcing-and-cqrs">Event Sourcing and CQRS</a></li>
+</ul></li>
 <li><a href="#deploymentinfrastructure"
 id="toc-deploymentinfrastructure">Deployment/Infrastructure</a></li>
 <li><a href="#security-and-privacy"
@@ -1605,6 +1637,130 @@ consistency.</li>
 <li>increased storage requirements</li>
 </ul>
 <h1 id="logic">Logic</h1>
+<h2 id="application-logic">Application Logic</h2>
+<ul>
+<li>logic required for generating dynamic web pages or providing
+application services and functions</li>
+<li>external and internal endpoints</li>
+<li>sequential execution of application logic
+<ul>
+<li>application server sequentially calls and waits for results from DBs
+and backend services</li>
+<li>does not scale for large number of backend services</li>
+</ul></li>
+<li>event-driven and asynchronous execution
+<ul>
+<li>first, dispatch all calls</li>
+<li>second, wait for all results</li>
+<li>this might require additional coordination or dependency
+management</li>
+</ul></li>
+</ul>
+<h2 id="stateless-and-stateful-application-logic">Stateless and Stateful
+Application Logic</h2>
+<ul>
+<li>stateless: independent request-response cycles, desireable for
+scalability</li>
+<li>specific meaning of state:
+<ul>
+<li>session state</li>
+<li>server-side application state (“stateful resources”)</li>
+</ul></li>
+</ul>
+<p>Examples: * Video transcoding service: * stateless service: each
+individual request contains all required information * easy scalability:
+replication * Game: * stateful application logic (game state) maintained
+by server * scalability strategy: sharding of game instances without
+shared state * Calendar: * stateless application logic, stateless
+request handling: state is queried from DB for every request, no
+dependency between requests * database maintains stateful resources:
+mutable data * scalability: replication of application servers, scaling
+of DB (see above)</p>
+<p>Stateless logic is prefered whenever possible. It might be possible
+to decompose application logic into stateless and stateful parts.</p>
+<h2 id="distributing-application-logic">Distributing Application
+Logic</h2>
+<h3 id="functional-partitioning">Functional Partitioning</h3>
+<ul>
+<li>Application specific characteristics</li>
+<li>Decouple application functions</li>
+<li>Application functions might still access the same backend</li>
+<li>Allows independent scaling of endpoints</li>
+</ul>
+<h3 id="horizontal-duplication-replication">Horizontal Duplication
+(Replication)</h3>
+<ul>
+<li>Multiple application servers run same copy of application logic</li>
+<li>often requires stateless request handling</li>
+<li>arbitrary load balancing strategy</li>
+</ul>
+<h3 id="data-partitioning-sharding">Data Partitioning (Sharding)</h3>
+<ul>
+<li>Designate instance to handle designated set of requests</li>
+<li>Partitioning based on e.g. user id, session id, client ip, etc</li>
+<li>allows stateful request handling logic</li>
+<li>load balancing needs to be aware of sharding</li>
+</ul>
+<h3 id="shared-and-global-state">Shared and Global State</h3>
+<ul>
+<li>state often handled by database system</li>
+<li>transactional semantics challending for distributed databases</li>
+<li>querying state from DB might not be fast enough</li>
+</ul>
+<p>Alternatives:</p>
+<ul>
+<li>state bound to individual shard: concurrency only within single
+application server</li>
+<li>distributed state between application instances: requires distriuted
+concurrency mechanism
+<ul>
+<li>actor model</li>
+<li>event-driven model (shared event bus, pubsub)</li>
+<li>distributed transactions</li>
+</ul></li>
+</ul>
+<h2 id="background-tasks">Background Tasks</h2>
+<ul>
+<li>request independent application logic
+<ul>
+<li>maintanance tasks</li>
+<li>data analysis tasks</li>
+</ul></li>
+<li>might be long running compared to requests</li>
+<li>often requires access to backend and application state</li>
+</ul>
+<h3 id="batch-processing">Batch Processing</h3>
+<ul>
+<li>long running task</li>
+<li>fully available and bounded input data</li>
+</ul>
+<h3 id="stream-processing">Stream Processing</h3>
+<ul>
+<li>continuous processing task</li>
+<li>input data unbounded and not available in advance</li>
+<li>results might be incomplete or approximate</li>
+<li>example: trending topic analysis on social networks</li>
+</ul>
+<h2 id="event-sourcing-and-cqrs">Event Sourcing and CQRS</h2>
+<ul>
+<li>CQRS: Command Query Responsibility Segregation</li>
+<li>idea: differentiate commands (no return value, might have side
+effects) and queries (returns data, no side effects)</li>
+<li>application to event based programming:
+<ul>
+<li>command model: state-changing operations, write only</li>
+<li>query model: read only query operations</li>
+<li>separation of models allows independent development and scaling
+strategies</li>
+</ul></li>
+<li>application to event sourcing:
+<ul>
+<li>command model creates events</li>
+<li>query model interacts with materialized state representation</li>
+<li>explicit eventual consistency</li>
+<li>easy scaling of query model, loose coupling of components</li>
+</ul></li>
+</ul>
 <h1 id="deploymentinfrastructure">Deployment/Infrastructure</h1>
 <h1 id="security-and-privacy">Security and Privacy</h1>
 <h1 id="devops">DevOps</h1>
