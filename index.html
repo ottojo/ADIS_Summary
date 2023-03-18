@@ -389,7 +389,30 @@ id="toc-microservices">Microservices</a></li>
 </ul></li>
 </ul></li>
 <li><a href="#security-and-privacy"
-id="toc-security-and-privacy">Security and Privacy</a></li>
+id="toc-security-and-privacy">Security and Privacy</a>
+<ul>
+<li><a href="#secured-communication"
+id="toc-secured-communication">Secured Communication</a>
+<ul>
+<li><a href="#tls" id="toc-tls">TLS</a></li>
+<li><a href="#browser-policies" id="toc-browser-policies">Browser
+Policies</a></li>
+</ul></li>
+<li><a href="#authentication" id="toc-authentication">Authentication</a>
+<ul>
+<li><a href="#http-digest" id="toc-http-digest">HTTP digest</a></li>
+<li><a href="#shibboleth" id="toc-shibboleth">Shibboleth</a></li>
+<li><a href="#openidoauth" id="toc-openidoauth">OpenID/OAuth</a></li>
+<li><a href="#jwt-json-web-token" id="toc-jwt-json-web-token">JWT: JSON
+web Token</a></li>
+</ul></li>
+<li><a href="#privacy" id="toc-privacy">Privacy</a>
+<ul>
+<li><a href="#privacy-by-design" id="toc-privacy-by-design">Privacy by
+Design</a></li>
+<li><a href="#data" id="toc-data">Data</a></li>
+</ul></li>
+</ul></li>
 <li><a href="#devops" id="toc-devops">DevOps</a></li>
 </ul>
 </nav>
@@ -2029,6 +2052,116 @@ growth</li>
 </ul></li>
 </ul>
 <h1 id="security-and-privacy">Security and Privacy</h1>
+<h2 id="secured-communication">Secured Communication</h2>
+<h3 id="tls">TLS</h3>
+<ul>
+<li>HTTPS: HTTP using TLS</li>
+<li>authenticated server (sometimes also client)</li>
+<li>encryption</li>
+</ul>
+<h3 id="browser-policies">Browser Policies</h3>
+<ul>
+<li>HSTS: HTTP Strict Transport Security
+<ul>
+<li>forces usage of HTTPS</li>
+<li>prevents downgrade attacks to HTTP</li>
+<li>enabled by special HTTP header
+<code>Strict-Transport-Security</code></li>
+</ul></li>
+<li>CORS: Cross-Origin Resource Sharing
+<ul>
+<li>relaxes same origin policy</li>
+<li>server explicitly allows browser to e.g. fetch scripts from other
+server</li>
+</ul></li>
+<li>CSP: Content Security Policy
+<ul>
+<li>protects against XSS</li>
+<li><code>Content-Security-Policy</code> headers instruct browser which
+resources are allowed to be loaded</li>
+</ul></li>
+<li>SRI: Subresource Integrity
+<ul>
+<li>allows specification of checksum for third party resources</li>
+<li>browser verifies checksum</li>
+</ul></li>
+</ul>
+<h2 id="authentication">Authentication</h2>
+<p>Problem: HTTP is stateless. Possible solutions:</p>
+<ul>
+<li>Send credentials with every access</li>
+<li>Include some access token with every access
+<ul>
+<li>could authenticate user for multiple services</li>
+<li>unauthenticated requests are redirected to ID provider, which then
+redirects back with token</li>
+<li>token could by implemented by signed/encrypted cookie</li>
+<li>token could move from id provider to server via some other
+channel</li>
+</ul></li>
+<li>Authenticate session context once</li>
+</ul>
+<p>Challenges:</p>
+<ul>
+<li>creation of access token</li>
+<li>single sign on</li>
+</ul>
+<h3 id="http-digest">HTTP digest</h3>
+<ul>
+<li>integrated into HTTP</li>
+<li>browser shows login popup</li>
+<li>should only be used with TLS</li>
+</ul>
+<h3 id="shibboleth">Shibboleth</h3>
+<ul>
+<li>protocol for outsourcing to external identity provider</li>
+<li>federated: there could be many identity providers. optionally
+provides discovery service</li>
+<li>intermediary token can carry additional attributes</li>
+</ul>
+<h3 id="openidoauth">OpenID/OAuth</h3>
+<ul>
+<li>underlying protocol: OAuth 2.0
+<ul>
+<li>OAuth designed to allow sharing of data between servers (e.g. allow
+printing service to access data of photo storage service)</li>
+</ul></li>
+<li>ID providers: Google, PayPal, Microsoft, etc</li>
+</ul>
+<h3 id="jwt-json-web-token">JWT: JSON web Token</h3>
+<ul>
+<li>format for “claims” (assertions, tokens)</li>
+<li>JSON based</li>
+<li>contains payload which asserts certain properties or identity, and
+signature</li>
+</ul>
+<h2 id="privacy">Privacy</h2>
+<h3 id="privacy-by-design">Privacy by Design</h3>
+<ul>
+<li>proactive not reactive</li>
+<li>privacy as default setting</li>
+<li>embedded into design instead of add-on</li>
+<li>full functionality including privacy instead of
+functionality/privacy trade</li>
+<li>end-to-end security</li>
+<li>transparency</li>
+<li>respect for user privacy (user centric)</li>
+</ul>
+<h3 id="data">Data</h3>
+<ul>
+<li>data at rest
+<ul>
+<li>minimize amount of stored data</li>
+<li>encrypt data</li>
+</ul></li>
+<li>data in transit
+<ul>
+<li>encryption: HTTPS</li>
+<li>server authentication</li>
+<li>also applies to internal communication, including client
+authentication</li>
+</ul></li>
+</ul>
 <h1 id="devops">DevOps</h1>
 </body>
 </html>
