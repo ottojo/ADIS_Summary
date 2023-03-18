@@ -69,3 +69,10 @@ transcoding
 Microservices
 microservice
 UI
+JWT
+HTTPS
+HSTS
+CORS
+XSS
+CSP
+Subresource
