@@ -18,5 +18,5 @@ src/q-state.md
 src/r-logic.md
 src/s-deployment_infrastructure.md
 src/t-security_privacy.md
-src/remaining_chapters.md
+src/u-devops.md
 metadata.yaml
