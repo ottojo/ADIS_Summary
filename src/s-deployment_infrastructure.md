@@ -106,3 +106,36 @@ Storage:
 * cloud: typically hypervisor based virtualization
 
 ## Advanced Topics
+### Monitoring
+* allows quantifiable metrics and shows if systems provide intended service
+* enables scaling decisions
+* see [performance metrics](#server-side-performance-metrics)
+* host/system monitoring
+  * CPU load, disk usage, etc
+* application monitoring
+  * response times, resource usage, end-user experience
+* network monitoring
+  * performance, availability, configuration
+* pitfalls:
+  * observer effect: monitoring might influence system under observation
+  * not enough data: problems not identified
+  * too much data: problem might be obscured or drowned out
+* security:
+  * identification of intrusions or misbehavior
+* distributed monitoring
+  * aggregation of monitoring data
+  * visualization
+
+### Logging
+* tracing of service behavior (compared to monitoring, which provides quantification)
+* logs originate from applications or system
+* structured, containing metadata such as source and timestamp
+* can be aggregated (over network)
+  * time-series database
+* distributed services:
+  * challenges with formats, time bases, etc
+  * might require unification of formats among components
+  * correlation of log entries which correspond to single request/transaction (e.g. via unique ID)
+  * clock synchronization of hosts
+
+### Microservices

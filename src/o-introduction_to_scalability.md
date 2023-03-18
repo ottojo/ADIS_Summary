@@ -20,7 +20,7 @@ Scalability is not the same as performance, as a system which has good performan
 * Time to start render
 * Time to interactive (TTI)
 
-### Server Side Performance Metrics
+### Server Side Performance Metrics {#server-side-performance-metrics}
 
 * request throughput (requests per second)
 * response times (time between receiving request and responding)
