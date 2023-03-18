@@ -380,7 +380,13 @@ Models</a></li>
 id="toc-virtualization">Virtualization</a></li>
 </ul></li>
 <li><a href="#advanced-topics" id="toc-advanced-topics">Advanced
-Topics</a></li>
+Topics</a>
+<ul>
+<li><a href="#monitoring" id="toc-monitoring">Monitoring</a></li>
+<li><a href="#logging" id="toc-logging">Logging</a></li>
+<li><a href="#microservices"
+id="toc-microservices">Microservices</a></li>
+</ul></li>
 </ul></li>
 <li><a href="#security-and-privacy"
 id="toc-security-and-privacy">Security and Privacy</a></li>
@@ -1913,6 +1919,62 @@ IaaS</h4>
 <li>cloud: typically hypervisor based virtualization</li>
 </ul>
 <h2 id="advanced-topics">Advanced Topics</h2>
+<h3 id="monitoring">Monitoring</h3>
+<ul>
+<li>allows quantifiable metrics and shows if systems provide intended
+service</li>
+<li>enables scaling decisions</li>
+<li>see <a href="#server-side-performance-metrics">performance
+metrics</a></li>
+<li>host/system monitoring
+<ul>
+<li>CPU load, disk usage, etc</li>
+</ul></li>
+<li>application monitoring
+<ul>
+<li>response times, resource usage, end-user experience</li>
+</ul></li>
+<li>network monitoring
+<ul>
+<li>performance, availability, configuration</li>
+</ul></li>
+<li>pitfalls:
+<ul>
+<li>observer effect: monitoring might influence system under
+observation</li>
+<li>not enough data: problems not identified</li>
+<li>too much data: problem might be obscured or drowned out</li>
+</ul></li>
+<li>security:
+<ul>
+<li>identification of intrusions or misbehavior</li>
+</ul></li>
+<li>distributed monitoring
+<ul>
+<li>aggregation of monitoring data</li>
+<li>visualization</li>
+</ul></li>
+</ul>
+<h3 id="logging">Logging</h3>
+<ul>
+<li>tracing of service behavior (compared to monitoring, which provides
+quantification)</li>
+<li>logs originate from applications or system</li>
+<li>structured, containing metadata such as source and timestamp</li>
+<li>can be aggregated (over network)
+<ul>
+<li>time-series database</li>
+</ul></li>
+<li>distributed services:
+<ul>
+<li>challenges with formats, time bases, etc</li>
+<li>might require unification of formats among components</li>
+<li>correlation of log entries which correspond to single
+request/transaction (e.g. via unique ID)</li>
+<li>clock synchronization of hosts</li>
+</ul></li>
+</ul>
+<h3 id="microservices">Microservices</h3>
 <h1 id="security-and-privacy">Security and Privacy</h1>
 <h1 id="devops">DevOps</h1>
 </body>
