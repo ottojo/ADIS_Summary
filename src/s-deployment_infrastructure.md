@@ -139,3 +139,34 @@ Storage:
   * clock synchronization of hosts
 
 ### Microservices
+
+Service Composition:
+
+* service-oriented architecture
+  * compose services of other services
+  * functional decomposition
+* horizontal decomposition
+  * technical aspects drive modules (load balancer, container, database)
+* vertical decomposition
+  * composition according to business logic (example: accounting, payment, customer relationship)
+  * microservices
+
+Microservices:
+
+* vertical decomposition
+  * each microservice full stack (each service contains logic, database, UI, load balancer)
+  * communication between services, e.g. via REST, RPC
+  * services decoupled from each other
+  * advantages:
+    * independent development
+    * can use own technology, which might not be appropriate for other services
+    * individual scaling
+  * disadvantages:
+    * business data spread over multiple DBs (-> consistency)
+* independent and evolutionary development
+  * independence due to well defined interfaces
+  * assumption of continuous development
+  * small development team covers entire development and operation
+  * disadvantages: duplicate developments, interfaces expensive to change
+* small size
+  * large enough to overcome deployment overhead, but usually no team growth
