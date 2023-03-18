@@ -1975,6 +1975,59 @@ request/transaction (e.g. via unique ID)</li>
 </ul></li>
 </ul>
 <h3 id="microservices">Microservices</h3>
+<p>Service Composition:</p>
+<ul>
+<li>service-oriented architecture
+<ul>
+<li>compose services of other services</li>
+<li>functional decomposition</li>
+</ul></li>
+<li>horizontal decomposition
+<ul>
+<li>technical aspects drive modules (load balancer, container,
+database)</li>
+</ul></li>
+<li>vertical decomposition
+<ul>
+<li>composition according to business logic (example: accounting,
+payment, customer relationship)</li>
+<li>microservices</li>
+</ul></li>
+</ul>
+<p>Microservices:</p>
+<ul>
+<li>vertical decomposition
+<ul>
+<li>each microservice full stack (each service contains logic, database,
+UI, load balancer)</li>
+<li>communication between services, e.g. via REST, RPC</li>
+<li>services decoupled from each other</li>
+<li>advantages:
+<ul>
+<li>independent development</li>
+<li>can use own technology, which might not be appropriate for other
+services</li>
+<li>individual scaling</li>
+</ul></li>
+<li>disadvantages:
+<ul>
+<li>business data spread over multiple DBs (-&gt; consistency)</li>
+</ul></li>
+</ul></li>
+<li>independent and evolutionary development
+<ul>
+<li>independence due to well defined interfaces</li>
+<li>assumption of continuous development</li>
+<li>small development team covers entire development and operation</li>
+<li>disadvantages: duplicate developments, interfaces expensive to
+change</li>
+</ul></li>
+<li>small size
+<ul>
+<li>large enough to overcome deployment overhead, but usually no team
+growth</li>
+</ul></li>
+</ul>
 <h1 id="security-and-privacy">Security and Privacy</h1>
 <h1 id="devops">DevOps</h1>
 </body>
