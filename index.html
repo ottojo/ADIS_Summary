@@ -1716,15 +1716,29 @@ scalability</li>
 <li>server-side application state (“stateful resources”)</li>
 </ul></li>
 </ul>
-<p>Examples: * Video transcoding service: * stateless service: each
-individual request contains all required information * easy scalability:
-replication * Game: * stateful application logic (game state) maintained
-by server * scalability strategy: sharding of game instances without
-shared state * Calendar: * stateless application logic, stateless
-request handling: state is queried from DB for every request, no
-dependency between requests * database maintains stateful resources:
-mutable data * scalability: replication of application servers, scaling
-of DB (see above)</p>
+<p>Examples:</p>
+<ul>
+<li>Video transcoding service:
+<ul>
+<li>stateless service: each individual request contains all required
+information</li>
+<li>easy scalability: replication</li>
+</ul></li>
+<li>Game:
+<ul>
+<li>stateful application logic (game state) maintained by server</li>
+<li>scalability strategy: sharding of game instances without shared
+state</li>
+</ul></li>
+<li>Calendar:
+<ul>
+<li>stateless application logic, stateless request handling: state is
+queried from DB for every request, no dependency between requests</li>
+<li>database maintains stateful resources: mutable data</li>
+<li>scalability: replication of application servers, scaling of DB (see
+above)</li>
+</ul></li>
+</ul>
 <p>Stateless logic is preferred whenever possible. It might be possible
 to decompose application logic into stateless and stateful parts.</p>
 <h2 id="distributing-application-logic">Distributing Application
