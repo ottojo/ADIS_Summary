@@ -17,6 +17,7 @@
   * server-side application state ("stateful resources")
 
 Examples:
+
 * Video transcoding service:
   * stateless service: each individual request contains all required information
   * easy scalability: replication
