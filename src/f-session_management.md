@@ -51,6 +51,6 @@ In principle, the entire state could be stored in a cookie, which eliminates the
 for server-side storage but has several drawbacks such as limited size and the possibility
 for the client to modify the state in unexpected ways.
 
-## Securtity
+## Security
 There are multiple security considerations regarding sessions, in particular Leaking the ID,
 which can lead to session hijacking and thus impersonating the user
